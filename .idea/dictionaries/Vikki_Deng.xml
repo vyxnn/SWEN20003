@@ -3,8 +3,10 @@
     <words>
       <w>fivesec</w>
       <w>initialspeed</w>
+      <w>initialtimescale</w>
       <w>minspeed</w>
       <w>slicermax</w>
+      <w>toseconds</w>
     </words>
   </dictionary>
 </component>

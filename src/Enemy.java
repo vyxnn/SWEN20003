@@ -13,15 +13,16 @@ abstract class Enemy {
 
     DrawOptions option = new DrawOptions();
     private static final int THRESHOLD = 1;
-
     private Vector2 vPos;
     private int speed, index;
     private double angle;
 
-    public Enemy(Point point, int speed){
+    //Part 2
+    private int health, reward, penalty, defaultSpeed;
+
+    public Enemy(Point point, int timescale){
         vPos = new Vector2(point.x, point.y);
         angle = atan2(point.y, point.x);
-        this.speed = speed;
         index = 0;
     }
 
@@ -29,8 +30,12 @@ abstract class Enemy {
         return index;
     }
 
+    protected void setSpeed(int defaultSpeed, int timescale){
+        this.defaultSpeed = defaultSpeed;
+        speed = defaultSpeed*timescale;
+    }
 
-    public void draw(Image enemy){
+    protected void drawImage(Image enemy){
         enemy.draw(vPos.x, vPos.y, option.setRotation(angle));
     }
 
@@ -53,11 +58,15 @@ abstract class Enemy {
     }
 
     /*Will change current speed by 1*/
-    public void increaseSpeed(){
-        speed += 1;
+    public void increaseSpeed(int timescale){
+        speed += defaultSpeed*timescale;
     }
 
-    public void decreaseSpeed(){
-        speed -= 1;
+    public void decreaseSpeed(int timescale){
+        if(speed >= 2*defaultSpeed*timescale) {
+            speed -= defaultSpeed * timescale;
+        }
     }
+
+    public abstract void drawImage();
 }

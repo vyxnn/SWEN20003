@@ -13,17 +13,16 @@ public class ShadowDefend <map> extends AbstractGame {
     private static final int FIVESEC = 300; //5secs*60frames = 300 fps
     private static final int MINSPEED = 1; //Timescale multiplier can't go under 1
     //UPDATE SPEED HERE
-    private static final int INITIALSPEED = 1;
+    public static final int INITIALTIMESCALE = 1;
 
     //Objects and variables
-    private final TiledMap map;
-    private final Image slicerImage;
     private final Image buyPanel;
     private final Image statusPanel;
     private Slicer[] slicerArr = new Slicer[SLICERMAX]; //This array can be modified to contain different enemies
     private final List path;
+    private Level level;
     private int time;
-    private int globalSpeed = INITIALSPEED;
+    private int globalSpeed = INITIALTIMESCALE;
 
     /**
      * Entry point for Bagel game
@@ -40,10 +39,11 @@ public class ShadowDefend <map> extends AbstractGame {
      */
     public ShadowDefend() {
         // Constructor
-        map = new TiledMap("res/levels/1.tmx");
-        path = map.getAllPolylines().get(0);
-        slicerImage = new Image("res/levels/images/slicer.png");
-        buyPanel = newImage()
+        level = new Level(1);
+        path = level.getPath();
+        buyPanel = new Image("res/images/buypanel.png");
+        statusPanel = new Image("res/images/statuspanel.png");
+
     }
 
     /**
@@ -54,43 +54,31 @@ public class ShadowDefend <map> extends AbstractGame {
     //Slicers move at a rate of 1fps
     @Override
     protected void update(Input input) {
-        map.draw(0, 0, 0, 0, Window.getWidth(), Window.getHeight());
+        //Drawing maps and panels
+        level.drawMap();
+        buyPanel.drawFromTopLeft(0,0);
+        statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
+                level.getMap().getHeight() - statusPanel.getHeight());
 
         //Starts a timer for a wave and spawns the first slicer if no wave has been started
-        if (input.wasPressed(Keys.S) && slicerArr[0] == null) {
-            newWave();
+        if (input.wasPressed(Keys.S)) {
+            level.startWave();
         }
 
-        /*Checks if a wave has started, then will spawn a new enemy every 5 seconds (or equivalent based off speed)
-          Continues until it has reached the max slicers */
-        if((slicerArr[0]!=null) && (time >= FIVESEC*INITIALSPEED/globalSpeed)
-                && (slicerArr[0].count < SLICERMAX)){
-            spawnEnemy();
-        }
-
-        /*If the first slicer exists, then will start moving them*/
-        if(slicerArr[0] != null) {
-            time++;
-            updateWave();
-        }
-
+        level.updateLevel();
         //Input functions
         /*Checks if speed is valid, then increase/decreases in slicer and
         keeps track of global speed in case there are no slicers spawned yet*/
         if(input.wasPressed(Keys.L)) {
-            globalSpeed += 1;
-            increaseSpeed();
+            level.increaseTimescale();
         }
 
         if(input.wasPressed(Keys.K)) {
-            if(globalSpeed > MINSPEED){
-                globalSpeed -= 1;
-                decreaseSpeed();
-            }
+            level.decreaseTimescale();
         }
 
         //Ending the wave/window
-        if (input.isDown(Keys.ESCAPE) || endWave()) {
+        if (input.isDown(Keys.ESCAPE)) {
             Window.close();
         }
 
@@ -120,7 +108,7 @@ public class ShadowDefend <map> extends AbstractGame {
                 break;
             }
             updateSlicer(slicer);
-            slicer.draw(slicerImage);
+            slicer.drawImage();
         }
     }
 
@@ -141,22 +129,4 @@ public class ShadowDefend <map> extends AbstractGame {
         return false;
     }
 
-    /*Decreases or increases all existing enemy speeds*/
-    public void increaseSpeed() {
-        for (Slicer slicer: slicerArr) {
-            if (slicer == null) {
-                break;
-            }
-            slicer.increaseSpeed();
-        }
-    }
-
-    public void decreaseSpeed() {
-        for (Slicer slicer: slicerArr) {
-            if (slicer == null) {
-                break;
-            }
-            slicer.decreaseSpeed();
-        }
-    }
 }
