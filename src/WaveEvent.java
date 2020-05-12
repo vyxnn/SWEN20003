@@ -33,6 +33,5 @@ public abstract class WaveEvent {
     public abstract void startWave(int timescale, List path);
     public abstract void updateWave(int timescale, List path);
     public abstract void endWave();
-    public abstract void increaseSpeed(int timescale);
-    public abstract void decreaseSpeed(int timescale);
+    public abstract void changeSpeed(int timescale);
 }

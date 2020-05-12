@@ -34,12 +34,8 @@ public class DelayEvent extends WaveEvent {
     }
 
     @Override
-    public void increaseSpeed(int timescale) {
+    public void changeSpeed(int timescale) {
 
     }
 
-    @Override
-    public void decreaseSpeed(int timescale) {
-
-    }
 }

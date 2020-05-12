@@ -57,15 +57,9 @@ abstract class Enemy {
         }
     }
 
-    /*Will change current speed by 1*/
-    public void increaseSpeed(int timescale){
-        speed += defaultSpeed*timescale;
-    }
 
-    public void decreaseSpeed(int timescale){
-        if(speed >= 2*defaultSpeed*timescale) {
-            speed -= defaultSpeed * timescale;
-        }
+    public void changeSpeed(int timescale){
+        speed = defaultSpeed * timescale;
     }
 
     public abstract void drawImage();

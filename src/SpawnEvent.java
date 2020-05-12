@@ -1,13 +1,14 @@
 import bagel.util.Point;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SpawnEvent extends WaveEvent {
     private final static int TOSECONDS = 1000;
     private final static int FPS = 60;
 
-    private int spawnNumber, delayTime, time;
+    private int spawnNumber, delayTime, time, spawned;
     private String enemyType;
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
@@ -24,6 +25,7 @@ public class SpawnEvent extends WaveEvent {
         time = 0;
         if(enemyType.equals("slicer")) {
             enemies.add(new Slicer((Point) path.get(0), timescale));
+            spawned = 1;
         }
         waveInProgress();
     }
@@ -33,21 +35,31 @@ public class SpawnEvent extends WaveEvent {
         if (time >= 0) {
             time++;
         }
-        if(time >= ((delayTime/TOSECONDS)*FPS/timescale) && enemies.size() < spawnNumber ){
+        if(time >= ((delayTime/TOSECONDS)*FPS/timescale) && spawned < spawnNumber ){
             enemies.add(new Slicer((Point) path.get(0), timescale));
+            spawned++;
             time = 0;
         }
 
-        for(Enemy e: enemies){
-            if (e == null) {
-                break;
-            }
+        Iterator<Enemy> itr = enemies.iterator();
+        while(itr.hasNext()) {
+            Enemy e = itr.next();
+
             if(e.getIndex() + 1 < path.size()) {
                 e.updatePos((Point) path.get(e.getIndex() + 1));
+                e.drawImage();
             }
-            e.drawImage();
+            else {
+                itr.remove();
+            }
         }
-        waveInProgress();
+
+        if(enemies.isEmpty()) {
+            endWave();
+        }
+        else {
+            waveInProgress();
+        }
     }
 
     @Override
@@ -56,23 +68,14 @@ public class SpawnEvent extends WaveEvent {
     }
 
     @Override
-    public void increaseSpeed(int timescale){
+    public void changeSpeed(int timescale){
         for(Enemy e: enemies) {
             if (e == null) {
                 break;
             }
-            e.increaseSpeed(timescale);
+            e.changeSpeed(timescale);
         }
     }
 
-    @Override
-    public void decreaseSpeed(int timescale){
-        for(Enemy e: enemies) {
-            if (e == null) {
-                break;
-            }
-            e.decreaseSpeed(timescale);
-        }
-    }
 
 }

@@ -1,28 +1,20 @@
-import bagel.AbstractGame;
-import bagel.Image;
-import bagel.Input;
-import bagel.Keys;
-import bagel.Window;
+import bagel.*;
 import bagel.map.TiledMap;
+import bagel.util.Colour;
 import bagel.util.Point;
 import java.util.List;
 
 public class ShadowDefend <map> extends AbstractGame {
-    //Constants
-    private static final int SLICERMAX = 5; //Number of slicers per wave
-    private static final int FIVESEC = 300; //5secs*60frames = 300 fps
-    private static final int MINSPEED = 1; //Timescale multiplier can't go under 1
+
     //UPDATE SPEED HERE
     public static final int INITIALTIMESCALE = 1;
 
     //Objects and variables
     private final Image buyPanel;
     private final Image statusPanel;
-    private Slicer[] slicerArr = new Slicer[SLICERMAX]; //This array can be modified to contain different enemies
-    private final List path;
+    private final Font font;
+    DrawOptions option = new DrawOptions();
     private Level level;
-    private int time;
-    private int globalSpeed = INITIALTIMESCALE;
 
     /**
      * Entry point for Bagel game
@@ -40,9 +32,9 @@ public class ShadowDefend <map> extends AbstractGame {
     public ShadowDefend() {
         // Constructor
         level = new Level(1);
-        path = level.getPath();
         buyPanel = new Image("res/images/buypanel.png");
         statusPanel = new Image("res/images/statuspanel.png");
+        font = new Font("res/fonts/DejaVuSans-Bold.ttf", 10);
 
     }
 
@@ -56,9 +48,8 @@ public class ShadowDefend <map> extends AbstractGame {
     protected void update(Input input) {
         //Drawing maps and panels
         level.drawMap();
+        drawStatusPanel();
         buyPanel.drawFromTopLeft(0,0);
-        statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
-                level.getMap().getHeight() - statusPanel.getHeight());
 
         //Starts a timer for a wave and spawns the first slicer if no wave has been started
         if (input.wasPressed(Keys.S)) {
@@ -84,49 +75,26 @@ public class ShadowDefend <map> extends AbstractGame {
 
     }
 
-    //For the purpose of this assignment will assume that there's only one wave of a slicer at a time
-    //Therefore can use the static count with slicer, otherwise needs to reset to 0 for other waves/maps
+    /* Drawing the Status Panel, sorry for the random numbers
+    they were found by trial and error and defining them would make the code messier than just leaving them*/
+    public void drawStatusPanel() {
 
-    /*Initializes the wave and spawns first slicer with regular speed*/
-    public void newWave(){
-        time = 0;
-        slicerArr[0] = new Slicer((Point) path.get(0), globalSpeed);
-    }
+        statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
+                level.getMap().getHeight() - statusPanel.getHeight());
+        font.drawString("Wave: " + level.getWaveNum(), 10, 752);
 
-    /*Spawns the rest of the enemies until max, resets timer
-      Spawns enemy at first point with current speed of the first slicer*/
-    public void spawnEnemy() {
-        slicerArr[slicerArr[0].count] = new Slicer((Point) path.get(0), globalSpeed);
-        time = 0;
-    }
-
-    /*Updates the entire wave, increments time */
-    public void updateWave() {
-        //Iterates over the array of slicers, and moves/draws if a slicer exists
-        for (Slicer slicer: slicerArr) {
-            if (slicer == null) {
-                break;
-            }
-            updateSlicer(slicer);
-            slicer.drawImage();
+        if(level.getTimescale() == 1) {
+            font.drawString("Timescale: " + level.getTimescale(), 260, 752);
         }
-    }
 
-    /*Updates the position of each slicer passed in*/
-    public void updateSlicer(Slicer slicer) {
-        //Checks if a slicer has a valid index and updates path for one frame if it does
-        if(slicer.getIndex() + 1 < path.size()) {
-            slicer.updatePos((Point) path.get(slicer.getIndex() + 1));
+        else {
+            font.drawString("Timescale: " + level.getTimescale(), 260, 752,
+                    option.setBlendColour(Colour.GREEN));
         }
-    }
 
-    /*Checks position of final slicer, if it's reached the final index then end game*/
-    public boolean endWave() {
-        Slicer lastSlicer = slicerArr[SLICERMAX -1];
-        if(lastSlicer != null && (lastSlicer.getIndex() + 1 >= path.size())){
-            return true;
-        }
-        return false;
-    }
+        font.drawString("Status: " + level.getWaveProgress(), 510, 752);
 
+        //Need to draw lives
+        font.drawString("Lives: " , 860, 752);
+    }
 }

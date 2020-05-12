@@ -84,13 +84,13 @@ public class Level {
 
     public void increaseTimescale(){
         timescale++;
-        events.get(eventIndex).increaseSpeed(timescale);
+        events.get(eventIndex).changeSpeed(timescale);
     }
 
     public void decreaseTimescale(){
         if (timescale>1) {
             timescale--;
-            events.get(eventIndex).decreaseSpeed(timescale);
+            events.get(eventIndex).changeSpeed(timescale);
         }
     }
 
@@ -119,6 +119,14 @@ public class Level {
 
     public void endLevel(){
 
+    }
+
+    public int getWaveNum(){
+        return waveNum;
+    }
+
+    public String getWaveProgress(){
+        return events.get(eventIndex).getWaveProgress();
     }
 
 }
