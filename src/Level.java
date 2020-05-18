@@ -4,28 +4,32 @@ import bagel.map.TiledMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Level {
     private int timescale, levelNum, waveNum, eventIndex;
     private TiledMap map;
-    private ArrayList<WaveEvent> events = new ArrayList<>();
+    //change events name
+    private ArrayList<Integer> eventIndexList = new ArrayList<>();
+    private ArrayList<WaveEvent> waveEventList = new ArrayList<>();
     private List path;
 
     public Level(int levelNum){
         this.levelNum = levelNum;
         waveNum = 0;
-        eventIndex = 0;
+        eventIndex = -1;
         //Gets map and wave data for specific level
         if (this.levelNum == 1) {
             map = new TiledMap("res/levels/1.tmx");
-            readData("res/levels/waves.txt");
         }
         else {
             map = new TiledMap("res/levels/2.tmx");
             //readData("res/levels/waves2.txt");
         }
 
+        readData("res/levels/waves.txt");
         path = map.getAllPolylines().get(0);
         timescale = ShadowDefend.INITIALTIMESCALE;
     }
@@ -70,9 +74,9 @@ public class Level {
         for(String s: eventString) {
             String tmp[] = s.split(",");
             if (tmp[1].equals("delay")) {
-                events.add(new DelayEvent(tmp));
+                waveEventList.add(new DelayEvent(tmp));
             } else if (tmp[1].equals("spawn")) {
-                events.add(new SpawnEvent(tmp));
+                waveEventList.add(new SpawnEvent(tmp));
             }
 
             //Do the throws/exceptions when reading
@@ -84,13 +88,11 @@ public class Level {
 
     public void increaseTimescale(){
         timescale++;
-        events.get(eventIndex).changeSpeed(timescale);
     }
 
     public void decreaseTimescale(){
         if (timescale>1) {
             timescale--;
-            events.get(eventIndex).changeSpeed(timescale);
         }
     }
 
@@ -100,20 +102,47 @@ public class Level {
 
     public void startWave(){
         waveNum++;
-        if(events.get(eventIndex).getWaveNumber() == waveNum) {
-            events.get(eventIndex).startWave(timescale, path);
+        startWaveEvent();
+    }
+
+    private void startWaveEvent(){
+        eventIndex++;
+        eventIndexList.add(eventIndex);
+        if(waveEventList.get(eventIndex).getWaveNumber() == waveNum) {
+            waveEventList.get(eventIndex).startWave(timescale, path);
         }
     }
 
-    public void updateLevel(){
-        if(events.get(eventIndex).getWaveProgress().equals("Wave in Progress")) {
-            events.get(eventIndex).updateWave(timescale, path);
+    // want to make it keep drawing for all active wave events
+    public void updateLevel() {
+        //Updates position for each active wave event
+        for(Integer eIndex : eventIndexList) {
+            if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {
+                waveEventList.get(eIndex).updateWave(timescale, path);
+            }
         }
 
-        if(events.get(eventIndex).getWaveProgress().equals("Awaiting Start")
-                && events.get(eventIndex + 1).getWaveNumber() == waveNum) {
-            eventIndex++;
-            startWave();
+        //Check if the last event is over, and adds new event if it is
+        if(eventIndexList.size() >= 1) {
+            Integer lastIndex = eventIndexList.get(eventIndexList.size() - 1);
+            if (lastIndex < waveEventList.size() -1
+                    && waveEventList.get(lastIndex).getEventProgress().equals("Event Over")
+                    && waveEventList.get(lastIndex + 1).getWaveNumber() == waveNum) {
+                startWaveEvent();
+            }
+        }
+
+        //Checks if entire wave is over
+        int count = 0;
+        for(Integer eIndex : eventIndexList){
+            if(!waveEventList.get(eIndex).getWaveProgress().equals("Awaiting Start")) {
+                break;
+            }
+            count++;
+        }
+        //Removes all current indexes if it is
+        if(count == eventIndexList.size()) {
+            eventIndexList.removeAll(eventIndexList);
         }
     }
 
@@ -121,12 +150,22 @@ public class Level {
 
     }
 
+
     public int getWaveNum(){
         return waveNum;
     }
 
     public String getWaveProgress(){
-        return events.get(eventIndex).getWaveProgress();
+        //If there is an active wave event, returns said wave progress
+        if(eventIndex >= 0 && !eventIndexList.isEmpty()) {
+            Integer lastIndex = eventIndexList.get(eventIndexList.size() - 1);
+            return waveEventList.get(lastIndex).getWaveProgress();
+        }
+
+        //Default
+        else {
+            return "Awaiting Start";
+        }
     }
 
 }

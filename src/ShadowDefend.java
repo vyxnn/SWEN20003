@@ -12,7 +12,7 @@ public class ShadowDefend <map> extends AbstractGame {
     //Objects and variables
     private final Image buyPanel;
     private final Image statusPanel;
-    private final Font font;
+    private final Font statusFont;
     DrawOptions option = new DrawOptions();
     private Level level;
 
@@ -34,7 +34,7 @@ public class ShadowDefend <map> extends AbstractGame {
         level = new Level(1);
         buyPanel = new Image("res/images/buypanel.png");
         statusPanel = new Image("res/images/statuspanel.png");
-        font = new Font("res/fonts/DejaVuSans-Bold.ttf", 10);
+        statusFont = new Font("res/fonts/DejaVuSans-Bold.ttf", 10);
 
     }
 
@@ -52,7 +52,7 @@ public class ShadowDefend <map> extends AbstractGame {
         buyPanel.drawFromTopLeft(0,0);
 
         //Starts a timer for a wave and spawns the first slicer if no wave has been started
-        if (input.wasPressed(Keys.S)) {
+        if (input.wasPressed(Keys.S) && level.getWaveProgress().equals("Awaiting Start")) {
             level.startWave();
         }
 
@@ -77,24 +77,24 @@ public class ShadowDefend <map> extends AbstractGame {
 
     /* Drawing the Status Panel, sorry for the random numbers
     they were found by trial and error and defining them would make the code messier than just leaving them*/
-    public void drawStatusPanel() {
+    private void drawStatusPanel() {
 
         statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
                 level.getMap().getHeight() - statusPanel.getHeight());
-        font.drawString("Wave: " + level.getWaveNum(), 10, 752);
+        statusFont.drawString("Wave: " + level.getWaveNum(), 10, 752);
 
         if(level.getTimescale() == 1) {
-            font.drawString("Timescale: " + level.getTimescale(), 260, 752);
+            statusFont.drawString("Timescale: " + level.getTimescale(), 260, 752);
         }
 
         else {
-            font.drawString("Timescale: " + level.getTimescale(), 260, 752,
+            statusFont.drawString("Timescale: " + level.getTimescale(), 260, 752,
                     option.setBlendColour(Colour.GREEN));
         }
 
-        font.drawString("Status: " + level.getWaveProgress(), 510, 752);
+        statusFont.drawString("Status: " + level.getWaveProgress(), 510, 752);
 
         //Need to draw lives
-        font.drawString("Lives: " , 860, 752);
+        statusFont.drawString("Lives: " , 860, 752);
     }
 }

@@ -23,24 +23,28 @@ public class SpawnEvent extends WaveEvent {
     @Override
     public void startWave(int timescale, List path) {
         time = 0;
-        if(enemyType.equals("slicer")) {
+        //if(enemyType.equals("slicer")) {
             enemies.add(new Slicer((Point) path.get(0), timescale));
             spawned = 1;
-        }
-        waveInProgress();
+        //}
+        super.waveInProgress();
     }
 
     @Override
     public void updateWave(int timescale, List path) {
+        changeSpeed(timescale);
+
         if (time >= 0) {
-            time++;
+            time+= timescale;
         }
-        if(time >= ((delayTime/TOSECONDS)*FPS/timescale) && spawned < spawnNumber ){
+        /* Checks if there's enemies to spawn*/
+        if(time >= ((delayTime/TOSECONDS)*FPS) && spawned < spawnNumber ){
             enemies.add(new Slicer((Point) path.get(0), timescale));
             spawned++;
             time = 0;
         }
 
+        /*Moves enemies and deletes them once they've reached the end*/
         Iterator<Enemy> itr = enemies.iterator();
         while(itr.hasNext()) {
             Enemy e = itr.next();
@@ -54,21 +58,21 @@ public class SpawnEvent extends WaveEvent {
             }
         }
 
+        /*Ends wave if no more enemies left or has spawned waves*/
         if(enemies.isEmpty()) {
-            endWave();
+            super.waveOver();
         }
+
+        else if (spawned == spawnNumber) {
+            super.eventOver();
+        }
+
         else {
-            waveInProgress();
+            super.waveInProgress();
         }
     }
 
-    @Override
-    public void endWave() {
-        super.waveOver();
-    }
-
-    @Override
-    public void changeSpeed(int timescale){
+    private void changeSpeed(int timescale){
         for(Enemy e: enemies) {
             if (e == null) {
                 break;

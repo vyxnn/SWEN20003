@@ -16,26 +16,19 @@ public class DelayEvent extends WaveEvent {
         super.waveInProgress();
     }
 
+    /*Ends wave when time is up*/
     @Override
     public void updateWave(int timescale, List path) {
-        while(time <= delayTime/timescale && time >= 0) {
-            time++;
+        if(time <= delayTime && time >= 0) {
+            time+= timescale;
             super.waveInProgress();
         }
 
-        if (time >= delayTime/timescale) {
-            endWave();
+        if (time >= delayTime) {
+            super.eventOver();
+            super.waveOver();
         }
     }
 
-    @Override
-    public void endWave() {
-        super.waveOver();
-    }
-
-    @Override
-    public void changeSpeed(int timescale) {
-
-    }
 
 }
