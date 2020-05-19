@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class Level {
+    //Rewards for the wave
+    private static final int BASEREWARD = 150;
+    private static final int WAVEINCREMENT = 100;
+
     private int timescale, levelNum, waveNum, eventIndex;
     private TiledMap map;
     //change events name
@@ -132,7 +136,7 @@ public class Level {
             }
         }
 
-        //Checks if entire wave is over
+        //Checks if entire wave is over by checking that every wave event has ended
         int count = 0;
         for(Integer eIndex : eventIndexList){
             if(!waveEventList.get(eIndex).getWaveProgress().equals("Awaiting Start")) {
@@ -140,9 +144,10 @@ public class Level {
             }
             count++;
         }
-        //Removes all current indexes if it is
-        if(count == eventIndexList.size()) {
+        //Removes all current indexes and rewards money if it is
+        if(count == eventIndexList.size() && !eventIndexList.isEmpty()) {
             eventIndexList.removeAll(eventIndexList);
+            PlayerData.getInstance().addMoney(BASEREWARD + waveNum*WAVEINCREMENT);
         }
     }
 

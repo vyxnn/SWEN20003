@@ -3,6 +3,7 @@ import bagel.util.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class SpawnEvent extends WaveEvent {
     private final static int TOSECONDS = 1000;
@@ -10,7 +11,7 @@ public class SpawnEvent extends WaveEvent {
 
     private int spawnNumber, delayTime, time, spawned;
     private String enemyType;
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<AbstractEnemy> enemyList = new ArrayList<>();
 
     public SpawnEvent(String waveData[]){
         super(waveData);
@@ -23,10 +24,8 @@ public class SpawnEvent extends WaveEvent {
     @Override
     public void startWave(int timescale, List path) {
         time = 0;
-        //if(enemyType.equals("slicer")) {
-            enemies.add(new Slicer((Point) path.get(0), timescale));
-            spawned = 1;
-        //}
+        addEnemy(timescale, path);
+        spawned = 1;
         super.waveInProgress();
     }
 
@@ -39,27 +38,34 @@ public class SpawnEvent extends WaveEvent {
         }
         /* Checks if there's enemies to spawn*/
         if(time >= ((delayTime/TOSECONDS)*FPS) && spawned < spawnNumber ){
-            enemies.add(new Slicer((Point) path.get(0), timescale));
+            addEnemy(timescale, path);
             spawned++;
             time = 0;
         }
 
         /*Moves enemies and deletes them once they've reached the end*/
-        Iterator<Enemy> itr = enemies.iterator();
+        ListIterator<AbstractEnemy> itr = enemyList.listIterator();
         while(itr.hasNext()) {
-            Enemy e = itr.next();
-
+            AbstractEnemy e = itr.next();
+            //Updates and draws if slicer is still on path
             if(e.getIndex() + 1 < path.size()) {
                 e.updatePos((Point) path.get(e.getIndex() + 1));
                 e.drawImage();
             }
+            //Slicer is dead, will reward and spawn new enemies
+            else if (e.getHealth() < 0) {
+                e.enemyDeath(itr, timescale);
+                itr.remove();
+            }
+            //Reached end of map without death, will add penalty;
             else {
+                e.enemyPenalty();
                 itr.remove();
             }
         }
 
         /*Ends wave if no more enemies left or has spawned waves*/
-        if(enemies.isEmpty()) {
+        if(enemyList.isEmpty()) {
             super.waveOver();
         }
 
@@ -72,8 +78,30 @@ public class SpawnEvent extends WaveEvent {
         }
     }
 
+    private void addEnemy(int timescale, List path){
+        if(enemyType.equals("slicer")) {
+            enemyList.add(new Slicer((Point) path.get(0), timescale));
+        }
+
+        else if (enemyType.equals("superslicer")) {
+            enemyList.add(new SuperSlicer((Point) path.get(0), timescale));
+        }
+
+        else if(enemyType.equals("megaslicer")) {
+            enemyList.add(new MegaSlicer((Point) path.get(0), timescale));
+        }
+
+        else if(enemyType.equals("apexslicer")) {
+            enemyList.add(new ApexSlicer((Point) path.get(0), timescale));
+        }
+
+        else {
+            System.out.println("Invalid Enemy Type");
+        }
+    }
+
     private void changeSpeed(int timescale){
-        for(Enemy e: enemies) {
+        for(AbstractEnemy e: enemyList) {
             if (e == null) {
                 break;
             }

@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="" />
+    <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ApexSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Vikki_Deng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Vikki_Deng.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShadowDefend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Slicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Slicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpawnEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Enemy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Level.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShadowDefend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShadowDefend.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Slicer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Slicer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SpawnEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SpawnEvent.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -62,7 +90,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowDefend" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ShadowDefend" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ShadowDefend" />
       <module name="bagel-starter-pack" />
       <method v="2">
@@ -71,7 +99,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ShadowDefend" />
         <item itemvalue="Application.Game" />
       </list>
     </recent_temporary>
@@ -102,7 +129,7 @@
       <workItem from="1589260308402" duration="333000" />
       <workItem from="1589260691514" duration="119000" />
       <workItem from="1589370019822" duration="15630000" />
-      <workItem from="1589595426349" duration="16541000" />
+      <workItem from="1589595426349" duration="29954000" />
     </task>
     <servers />
   </component>
@@ -118,46 +145,46 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="82" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1589788395735" />
-    <state width="1167" height="157" key="GridCell.Tab.0.bottom" timestamp="1589807183630">
-      <screen x="0" y="0" width="1210" height="720" />
+    <state width="1237" height="157" key="GridCell.Tab.0.bottom" timestamp="1589890028237">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.bottom/0.0.1210.720@0.0.1210.720" timestamp="1589807183630" />
-    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589804292761" />
-    <state width="1167" height="157" key="GridCell.Tab.0.center" timestamp="1589807183630">
-      <screen x="0" y="0" width="1210" height="720" />
+    <state width="1167" height="157" key="GridCell.Tab.0.bottom/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
+    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
+    <state width="1237" height="157" key="GridCell.Tab.0.center" timestamp="1589890028237">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.center/0.0.1210.720@0.0.1210.720" timestamp="1589807183630" />
-    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589804292761" />
-    <state width="1167" height="157" key="GridCell.Tab.0.left" timestamp="1589807183630">
-      <screen x="0" y="0" width="1210" height="720" />
+    <state width="1167" height="157" key="GridCell.Tab.0.center/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
+    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
+    <state width="1237" height="157" key="GridCell.Tab.0.left" timestamp="1589890028236">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.left/0.0.1210.720@0.0.1210.720" timestamp="1589807183630" />
-    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589804292760" />
-    <state width="1167" height="157" key="GridCell.Tab.0.right" timestamp="1589807183630">
-      <screen x="0" y="0" width="1210" height="720" />
+    <state width="1167" height="157" key="GridCell.Tab.0.left/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
+    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589890028236" />
+    <state width="1237" height="157" key="GridCell.Tab.0.right" timestamp="1589890028237">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.right/0.0.1210.720@0.0.1210.720" timestamp="1589807183630" />
-    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589804292761" />
-    <state width="1237" height="203" key="GridCell.Tab.1.bottom" timestamp="1589802040953">
+    <state width="1167" height="157" key="GridCell.Tab.0.right/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
+    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
+    <state width="1237" height="203" key="GridCell.Tab.1.bottom" timestamp="1589888615756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="219" key="GridCell.Tab.1.bottom/0.0.1210.720@0.0.1210.720" timestamp="1589284117721" />
-    <state width="1237" height="203" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589802040953" />
-    <state width="1237" height="203" key="GridCell.Tab.1.center" timestamp="1589802040953">
+    <state width="1237" height="203" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589888615756" />
+    <state width="1237" height="203" key="GridCell.Tab.1.center" timestamp="1589888615756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="219" key="GridCell.Tab.1.center/0.0.1210.720@0.0.1210.720" timestamp="1589284117721" />
-    <state width="1237" height="203" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1589802040953" />
-    <state width="1237" height="203" key="GridCell.Tab.1.left" timestamp="1589802040953">
+    <state width="1237" height="203" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1589888615756" />
+    <state width="1237" height="203" key="GridCell.Tab.1.left" timestamp="1589888615755">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="219" key="GridCell.Tab.1.left/0.0.1210.720@0.0.1210.720" timestamp="1589284117721" />
-    <state width="1237" height="203" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1589802040953" />
-    <state width="1237" height="203" key="GridCell.Tab.1.right" timestamp="1589802040953">
+    <state width="1237" height="203" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1589888615755" />
+    <state width="1237" height="203" key="GridCell.Tab.1.right" timestamp="1589888615756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="219" key="GridCell.Tab.1.right/0.0.1210.720@0.0.1210.720" timestamp="1589284117721" />
-    <state width="1237" height="203" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1589802040953" />
+    <state width="1237" height="203" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1589888615756" />
     <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1589263348703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

@@ -7,38 +7,50 @@ import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Vector2;
+
+import java.util.Iterator;
+import java.util.ListIterator;
+
 import static java.lang.Math.atan2;
 
-abstract class Enemy {
+abstract class AbstractEnemy {
 
     DrawOptions option = new DrawOptions();
     private static final int THRESHOLD = 1;
     private Vector2 vPos;
-    private int speed, index;
-    private double angle;
+    private int index;
+    private double angle, speed;
 
     //Part 2
-    private int health, reward, penalty, defaultSpeed;
+    private int health, reward, penalty;
+    private double defaultSpeed;
 
-    public Enemy(Point point, int timescale){
+    public AbstractEnemy(Point point, int timescale){
         vPos = new Vector2(point.x, point.y);
         angle = atan2(point.y, point.x);
         index = 0;
     }
 
+    //Getters and Setters
     public int getIndex(){
         return index;
     }
+    public int getHealth(){
+        return health;
+    }
+    public Point getPoint(){
+        return vPos.asPoint();
+    }
 
-    protected void setSpeed(int defaultSpeed, int timescale){
+    protected void setAttributes(double defaultSpeed, int timescale, int health, int reward, int penalty){
         this.defaultSpeed = defaultSpeed;
         speed = defaultSpeed*timescale;
+        this.health = health;
+        this.reward = reward;
+        this.penalty = penalty;
     }
 
-    protected void drawImage(Image enemy){
-        enemy.draw(vPos.x, vPos.y, option.setRotation(angle));
-    }
-
+    //Updates position of each enemy
     public void updatePos(Point towards){
         Vector2 vTow = new Vector2(towards.x, towards.y);
         //Original vector is calculated from origin, subtracting changes it to be relevant to specific position
@@ -57,10 +69,17 @@ abstract class Enemy {
         }
     }
 
-
+    //Updates speed of each enemy
     public void changeSpeed(int timescale){
         speed = defaultSpeed * timescale;
     }
 
+    //Used for drawing the enemy
+    protected void drawImage(Image enemy){
+        enemy.draw(vPos.x, vPos.y, option.setRotation(angle));
+    }
+
     public abstract void drawImage();
+    public abstract void enemyDeath(ListIterator enemyList, int timescale);
+    public abstract void enemyPenalty();
 }

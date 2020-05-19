@@ -1,24 +1,37 @@
 import bagel.Image;
 import bagel.util.Point;
 
-public class Slicer extends Enemy {
+import java.util.Iterator;
+import java.util.ListIterator;
 
-    public static int count=0;
+public class Slicer extends AbstractEnemy {
+
     private Image slicerImage;
-    private int defaultSpeed = 1;
+    private double defaultSpeed = 2;
+    private int health = 1, reward = 2, penalty = 1;
 
     //Constructor for slicer
     public Slicer(Point point, int timescale) {
         super(point, timescale);
-        setSpeed(defaultSpeed, timescale);
-        count++;
-        slicerImage = new Image("res/levels/images/slicer.png");
+        setAttributes(defaultSpeed, timescale, health, reward, penalty);
+        slicerImage = new Image("res/images/slicer.png");
+    }
+
+    //Draws slicer with image
+    @Override
+    public void drawImage() {
+        super.drawImage(slicerImage);
     }
 
     @Override
-    public void drawImage() {
-        super.drawImage(this.slicerImage);
+    public void enemyDeath(ListIterator enemyList, int timescale ){
+        //Gives money
+        PlayerData.getInstance().addMoney(reward);
     }
 
+    @Override
+    public void enemyPenalty(){
+        PlayerData.getInstance().loseLife(penalty);
+    }
 
 }
