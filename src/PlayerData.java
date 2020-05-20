@@ -1,5 +1,5 @@
 public class PlayerData {
-    public static PlayerData playerDataInstance = null;
+    private static PlayerData playerDataInstance = null;
     private static int money;
     private static int life;
 

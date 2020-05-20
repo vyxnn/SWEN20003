@@ -13,7 +13,7 @@ public class ApexSlicer extends AbstractEnemy{
     //Constructor for slicer
     public ApexSlicer(Point point, int timescale) {
         super(point, timescale);
-        setAttributes(defaultSpeed, timescale, health, reward, penalty);
+        setAttributes(defaultSpeed, timescale, penalty, health);
         apexSlicerImage = new Image("res/images/apexslicer.png");
     }
 
@@ -31,11 +31,6 @@ public class ApexSlicer extends AbstractEnemy{
         }
 
         PlayerData.getInstance().addMoney(reward);
-    }
-
-    @Override
-    public void enemyPenalty(){
-        PlayerData.getInstance().loseLife(penalty);
     }
 
 }

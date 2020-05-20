@@ -22,7 +22,7 @@ abstract class AbstractEnemy {
     private double angle, speed;
 
     //Part 2
-    private int health, reward, penalty;
+    private int penalty, health;
     private double defaultSpeed;
 
     public AbstractEnemy(Point point, int timescale){
@@ -35,19 +35,19 @@ abstract class AbstractEnemy {
     public int getIndex(){
         return index;
     }
-    public int getHealth(){
-        return health;
-    }
+
     public Point getPoint(){
         return vPos.asPoint();
     }
-
-    protected void setAttributes(double defaultSpeed, int timescale, int health, int reward, int penalty){
+    public int getHealth(){
+        return health; 
+    }
+    //Don't actually need any of the details aside from speed in here
+    protected void setAttributes(double defaultSpeed, int timescale, int penalty, int health){
         this.defaultSpeed = defaultSpeed;
         speed = defaultSpeed*timescale;
-        this.health = health;
-        this.reward = reward;
         this.penalty = penalty;
+        this.health = health;
     }
 
     //Updates position of each enemy
@@ -79,7 +79,12 @@ abstract class AbstractEnemy {
         enemy.draw(vPos.x, vPos.y, option.setRotation(angle));
     }
 
+    public void enemyPenalty(){
+        PlayerData.getInstance().loseLife(penalty);
+    }
+
     public abstract void drawImage();
     public abstract void enemyDeath(ListIterator enemyList, int timescale);
-    public abstract void enemyPenalty();
+    //get health as a public abstract void?
+
 }

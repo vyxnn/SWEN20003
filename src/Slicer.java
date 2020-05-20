@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 public class Slicer extends AbstractEnemy {
-
     private Image slicerImage;
     private double defaultSpeed = 2;
     private int health = 1, reward = 2, penalty = 1;
@@ -13,7 +12,7 @@ public class Slicer extends AbstractEnemy {
     //Constructor for slicer
     public Slicer(Point point, int timescale) {
         super(point, timescale);
-        setAttributes(defaultSpeed, timescale, health, reward, penalty);
+        setAttributes(defaultSpeed, timescale, penalty, health);
         slicerImage = new Image("res/images/slicer.png");
     }
 
@@ -24,14 +23,8 @@ public class Slicer extends AbstractEnemy {
     }
 
     @Override
-    public void enemyDeath(ListIterator enemyList, int timescale ){
-        //Gives money
+    public void enemyDeath(ListIterator enemyList, int timescale) {
         PlayerData.getInstance().addMoney(reward);
-    }
-
-    @Override
-    public void enemyPenalty(){
-        PlayerData.getInstance().loseLife(penalty);
     }
 
 }

@@ -12,7 +12,7 @@ public class MegaSlicer extends AbstractEnemy {
     //Constructor for slicer
     public MegaSlicer(Point point, int timescale) {
         super(point, timescale);
-        setAttributes(defaultSpeed, timescale, health, reward, penalty);
+        setAttributes(defaultSpeed, timescale, penalty, health);
         megaSlicerImage = new Image("res/images/megaslicer.png");
     }
 
@@ -30,11 +30,6 @@ public class MegaSlicer extends AbstractEnemy {
         }
         //Gives money
         PlayerData.getInstance().addMoney(reward);
-
     }
 
-    @Override
-    public void enemyPenalty(){
-        PlayerData.getInstance().loseLife(penalty);
-    }
 }

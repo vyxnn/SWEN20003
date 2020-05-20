@@ -2,19 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ApexSlicer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Vikki_Deng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Vikki_Deng.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShadowDefend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AbstractEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AbstractEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApexSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApexSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MegaSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MegaSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Slicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Slicer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SpawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SpawnEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Enemy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Level.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShadowDefend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShadowDefend.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SuperSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SuperSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AbstractEnemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AbstractEnemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ApexSlicer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ApexSlicer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MegaSlicer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MegaSlicer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PlayerData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Slicer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Slicer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SpawnEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SpawnEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SuperSlicer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SuperSlicer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dengv-workshops/workshop-7" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dengv-workshops/workshop-8" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -129,7 +129,7 @@
       <workItem from="1589260308402" duration="333000" />
       <workItem from="1589260691514" duration="119000" />
       <workItem from="1589370019822" duration="15630000" />
-      <workItem from="1589595426349" duration="29954000" />
+      <workItem from="1589595426349" duration="39060000" />
     </task>
     <servers />
   </component>
@@ -137,34 +137,34 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser" timestamp="1589282365419">
+    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser" timestamp="1589964928804">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1589282365419" />
-    <state x="421" y="82" key="FileChooserDialogImpl" timestamp="1589788395735">
+    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1589964928804" />
+    <state x="421" y="82" key="FileChooserDialogImpl" timestamp="1589963059503">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="82" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1589788395735" />
-    <state width="1237" height="157" key="GridCell.Tab.0.bottom" timestamp="1589890028237">
+    <state x="421" y="82" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1589963059503" />
+    <state width="1237" height="157" key="GridCell.Tab.0.bottom" timestamp="1589978040536">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="157" key="GridCell.Tab.0.bottom/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
-    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
-    <state width="1237" height="157" key="GridCell.Tab.0.center" timestamp="1589890028237">
+    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589978040536" />
+    <state width="1237" height="157" key="GridCell.Tab.0.center" timestamp="1589978040535">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="157" key="GridCell.Tab.0.center/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
-    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
-    <state width="1237" height="157" key="GridCell.Tab.0.left" timestamp="1589890028236">
+    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589978040535" />
+    <state width="1237" height="157" key="GridCell.Tab.0.left" timestamp="1589978040535">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="157" key="GridCell.Tab.0.left/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
-    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589890028236" />
-    <state width="1237" height="157" key="GridCell.Tab.0.right" timestamp="1589890028237">
+    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589978040535" />
+    <state width="1237" height="157" key="GridCell.Tab.0.right" timestamp="1589978040535">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1167" height="157" key="GridCell.Tab.0.right/0.0.1210.720@0.0.1210.720" timestamp="1589887269358" />
-    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589890028237" />
+    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589978040535" />
     <state width="1237" height="203" key="GridCell.Tab.1.bottom" timestamp="1589888615756">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

@@ -12,7 +12,7 @@ public class SuperSlicer extends AbstractEnemy {
     //Constructor for slicer
     public SuperSlicer(Point point, int timescale) {
         super(point, timescale);
-        setAttributes(defaultSpeed, timescale, health, reward, penalty);
+        setAttributes(defaultSpeed, timescale, penalty, health);
         superSlicerImage = new Image("res/images/superslicer.png");
     }
 
@@ -30,11 +30,6 @@ public class SuperSlicer extends AbstractEnemy {
         }
 
         PlayerData.getInstance().addMoney(reward);
-    }
-
-    @Override
-    public void enemyPenalty(){
-        PlayerData.getInstance().loseLife(penalty);
     }
 
 
