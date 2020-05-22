@@ -1,7 +1,7 @@
+package EventPackage;
+import EnemyPackage.*;
 import bagel.util.Point;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -31,11 +31,12 @@ public class SpawnEvent extends WaveEvent {
 
     @Override
     public void updateWave(int timescale, List path) {
+        /*Updating speed and keeping track of time for spawning*/
         changeSpeed(timescale);
-
         if (time >= 0) {
             time+= timescale;
         }
+
         /* Checks if there's enemies to spawn*/
         if(time >= ((delayTime/TOSECONDS)*FPS) && spawned < spawnNumber ){
             addEnemy(timescale, path);
@@ -52,23 +53,29 @@ public class SpawnEvent extends WaveEvent {
                 e.updatePos((Point) path.get(e.getIndex() + 1));
                 e.drawImage();
             }
-            //Slicer is dead, will reward and spawn new enemies
+            //Slicer is dead, will reward and spawn new enemies, removes dead enemy
             else if (e.getHealth() < 0) {
                 e.enemyDeath(itr, timescale);
                 itr.remove();
             }
-            //Reached end of map without death, will add penalty;
+            //Reached end of map without death, will add penalty, removes enemies from map
             else {
                 e.enemyPenalty();
                 itr.remove();
             }
         }
 
-        /*Ends wave if no more enemies left or has spawned waves*/
+        //Checks and updates the wave and event progress
+        updateProgress();
+    }
+
+
+    private void updateProgress(){
+        /*Ends wave if all enemies are dead or left the map*/
         if(enemyList.isEmpty()) {
             super.waveOver();
         }
-
+        /*Ends wave event if there is no more enemies to spawn*/
         else if (spawned == spawnNumber) {
             super.eventOver();
         }
@@ -78,6 +85,7 @@ public class SpawnEvent extends WaveEvent {
         }
     }
 
+    /*Choosing a spawn type for the event*/
     private void addEnemy(int timescale, List path){
         if(enemyType.equals("slicer")) {
             enemyList.add(new Slicer((Point) path.get(0), timescale));
@@ -94,12 +102,13 @@ public class SpawnEvent extends WaveEvent {
         else if(enemyType.equals("apexslicer")) {
             enemyList.add(new ApexSlicer((Point) path.get(0), timescale));
         }
-
+        //Throws error?
         else {
             System.out.println("Invalid Enemy Type");
         }
     }
 
+    /* Updates the current enemy speeds based off current timescale */
     private void changeSpeed(int timescale){
         for(AbstractEnemy e: enemyList) {
             if (e == null) {

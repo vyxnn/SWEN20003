@@ -1,7 +1,7 @@
+package EnemyPackage;
+import PlayerPackage.*;
 import bagel.Image;
 import bagel.util.Point;
-
-import java.util.Iterator;
 import java.util.ListIterator;
 
 public class ApexSlicer extends AbstractEnemy{

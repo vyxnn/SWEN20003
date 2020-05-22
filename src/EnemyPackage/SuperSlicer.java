@@ -1,6 +1,7 @@
+package EnemyPackage;
+import PlayerPackage.*;
 import bagel.Image;
 import bagel.util.Point;
-
 import java.util.ListIterator;
 
 public class SuperSlicer extends AbstractEnemy {

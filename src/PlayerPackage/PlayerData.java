@@ -1,3 +1,5 @@
+package PlayerPackage;
+
 public class PlayerData {
     private static PlayerData playerDataInstance = null;
     private static int money;

@@ -1,8 +1,6 @@
 import bagel.*;
-import bagel.map.TiledMap;
 import bagel.util.Colour;
-import bagel.util.Point;
-import java.util.List;
+import PlayerPackage.*;
 
 public class ShadowDefend <map> extends AbstractGame {
 
@@ -57,12 +55,13 @@ public class ShadowDefend <map> extends AbstractGame {
         drawStatusPanel();
         drawBuyPanel();
 
-        //Starts a timer for a wave and spawns the first slicer if no wave has been started
+        //Starts a wave if one is not in progress
         if (input.wasPressed(Keys.S) && level.getWaveProgress().equals("Awaiting Start")) {
             level.startWave();
         }
-
         level.updateLevel();
+
+
         //Input functions
         /*Checks if speed is valid, then increase/decreases in slicer and
         keeps track of global speed in case there are no slicers spawned yet*/
@@ -118,8 +117,6 @@ public class ShadowDefend <map> extends AbstractGame {
         airImage.draw(304, mid);
         //EITHER DEFINE THESE NUMBERS OR GET IT FROM CLASS
         drawTowerCost();
-
-
     }
 
     private void drawTowerCost() {

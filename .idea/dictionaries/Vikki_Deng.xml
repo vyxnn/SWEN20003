@@ -2,12 +2,14 @@
   <dictionary name="Vikki Deng">
     <words>
       <w>apexslicer</w>
+      <w>cooldown</w>
       <w>deathspawn</w>
       <w>fivesec</w>
       <w>initialspeed</w>
       <w>initialtimescale</w>
       <w>megaslicer</w>
       <w>minspeed</w>
+      <w>proj</w>
       <w>slicermax</w>
       <w>superslicer</w>
       <w>toseconds</w>

@@ -2,18 +2,16 @@
  *Currently the majority of slicer operations seem generic enough to be included in an Enemy Class
  *If my assumptions are wrong and there is only one enemy for the whole game, then can easily move everything to Slicer
  */
-
+package EnemyPackage;
+import PlayerPackage.*;
 import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Vector2;
-
-import java.util.Iterator;
 import java.util.ListIterator;
-
 import static java.lang.Math.atan2;
 
-abstract class AbstractEnemy {
+public abstract class AbstractEnemy {
 
     DrawOptions option = new DrawOptions();
     private static final int THRESHOLD = 1;
@@ -40,7 +38,7 @@ abstract class AbstractEnemy {
         return vPos.asPoint();
     }
     public int getHealth(){
-        return health; 
+        return health;
     }
     //Don't actually need any of the details aside from speed in here
     protected void setAttributes(double defaultSpeed, int timescale, int penalty, int health){

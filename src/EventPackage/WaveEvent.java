@@ -1,3 +1,4 @@
+package EventPackage;
 import java.util.List;
 
 public abstract class WaveEvent {
@@ -11,11 +12,11 @@ public abstract class WaveEvent {
         eventProgress = "Awaiting Start";
     }
 
-    protected String getEventType(){
+    public String getEventType(){
         return eventType;
     }
 
-    protected String getWaveProgress(){
+    public String getWaveProgress(){
         return waveProgress;
     }
 
