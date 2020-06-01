@@ -1,7 +1,9 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Vikki Deng">
     <words>
+      <w>airplaneprice</w>
       <w>apexslicer</w>
+      <w>basereward</w>
       <w>cooldown</w>
       <w>deathspawn</w>
       <w>fivesec</w>
@@ -12,7 +14,10 @@
       <w>proj</w>
       <w>slicermax</w>
       <w>superslicer</w>
+      <w>supertankprice</w>
+      <w>tankprice</w>
       <w>toseconds</w>
+      <w>waveincrement</w>
     </words>
   </dictionary>
 </component>

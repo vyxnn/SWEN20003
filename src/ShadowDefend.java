@@ -1,17 +1,44 @@
 import bagel.*;
 import bagel.util.Colour;
 import PlayerPackage.*;
+import bagel.util.Point;
 
+/**
+ *
+ * @param <map>
+ */
 public class ShadowDefend <map> extends AbstractGame {
-
-    //UPDATE SPEED HERE
-    public static final int INITIALTIMESCALE = 1;
-
+    //Definitions for all the panel placements
+    private final static int TIMESCALE_X = 260;
+    private final static int STATUS_PANEL_Y = 752;
+    private final static int WAVE_X = 10;
+    private final static int LIFE_X = 860;
+    private final static int STATUS_X = 510;
+    private final static int KEY_BIND_X = 500;
+    private final static int KEY_BIND_Y = 20;
+    private final static int S_BIND_Y = 45;
+    private final static int L_BIND_Y = 60;
+    private final static int K_BIND_Y = 75;
+    private final static int BUY_OFFSET = 10;
+    private final static int TOWER_Y = 90;
+    private final static int TOWER_X = 32;
+    //Public so I can access from other classes and change in one place only
+    public final static int ITEM_OFFSET = 64;
+    public final static int ITEM_GAP = 120;
+    //Tank prices
+    public final static int TANKPRICE = 250;
+    public final static int SUPERTANKPRICE = 600;
+    public final static int AIRPLANEPRICE = 500;
+    //Others
+    public final static String TANK = "tank";
+    public final static String SUPERTANK = "supertank";
+    public final static String AIRPLANE = "airplane";
+    public final static String FALSE = "false";
     //Objects and variables
     private final Image buyPanel, statusPanel;
     private final Image tankImage, superTankImage, airImage;
     private final Font statusFont, moneyFont, keyBindFont, towerFont;
-    DrawOptions option = new DrawOptions();
+    private DrawOptions option = new DrawOptions();
     private Level level;
 
     /**
@@ -55,22 +82,40 @@ public class ShadowDefend <map> extends AbstractGame {
         drawStatusPanel();
         drawBuyPanel();
 
+        //Checks if there is an item being placed, and renders it where the mouse is
+        if (!level.getTowerProgress().equals(false)) {
+            level.drawTowerView(input);
+        }
+
         //Starts a wave if one is not in progress
         if (input.wasPressed(Keys.S) && level.getWaveProgress().equals("Awaiting Start")) {
             level.startWave();
         }
+
         level.updateLevel();
 
-
         //Input functions
-        /*Checks if speed is valid, then increase/decreases in slicer and
-        keeps track of global speed in case there are no slicers spawned yet*/
+        //Increasing/Decreasing global timescale
         if(input.wasPressed(Keys.L)) {
-            level.increaseTimescale();
+            PlayerData.getInstance().increaseTimescale();
         }
 
         if(input.wasPressed(Keys.K)) {
-            level.decreaseTimescale();
+            PlayerData.getInstance().decreaseTimescale();
+        }
+        //If left mouse button was pressed, and there is a tower being placed, will place the item
+        if (input.wasPressed(MouseButtons.LEFT) && !level.getTowerProgress().equals(FALSE)) {
+            level.placeTower(input);
+        }
+
+        //If left mouse button was pressed, and there is no current tower being placed, create new tower to place
+        if (input.wasPressed(MouseButtons.LEFT) && level.getTowerProgress().equals(FALSE)) {
+            level.checkMouse(input);
+        }
+
+        //If right mouse button was pressed and there a tower being place, undoes the view
+        if (input.wasPressed(MouseButtons.RIGHT) && !level.getTowerProgress().equals(FALSE)) {
+            level.setTowerProgress(FALSE);
         }
 
         //Ending the wave/window
@@ -80,64 +125,65 @@ public class ShadowDefend <map> extends AbstractGame {
 
     }
 
-    /* Drawing the Status Panel, sorry for the random numbers
-    they were found by trial and error and defining them would make the code messier than just leaving them*/
     private void drawStatusPanel() {
         statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
                 level.getMap().getHeight() - statusPanel.getHeight());
 
         //Timescale, default if 1, green otherwise
-        if(level.getTimescale() == 1) {
-            statusFont.drawString("Timescale: " + level.getTimescale(), 260, 752);
+        if(PlayerData.getInstance().getTimescale() == 1) {
+            statusFont.drawString("Timescale: " + PlayerData.getInstance().getTimescale(),
+                    TIMESCALE_X, STATUS_PANEL_Y);
         }
         else {
-            statusFont.drawString("Timescale: " + level.getTimescale(), 260, 752,
-                    option.setBlendColour(Colour.GREEN));
+            statusFont.drawString("Timescale: " + PlayerData.getInstance().getTimescale(),
+                    TIMESCALE_X, STATUS_PANEL_Y, option.setBlendColour(Colour.GREEN));
         }
         //Other status data
-        statusFont.drawString("Wave: " + level.getWaveNum(), 10, 752);
-        statusFont.drawString("Status: " + level.getWaveProgress(), 510, 752);
-        statusFont.drawString("Lives: " + PlayerData.getInstance().getLife(), 860, 752);
+        statusFont.drawString("Wave: " + level.getWaveNum(), WAVE_X, STATUS_PANEL_Y);
+        statusFont.drawString("Status: " + level.getWaveProgress(), STATUS_X, STATUS_PANEL_Y);
+        statusFont.drawString("Lives: " + PlayerData.getInstance().getLife(), LIFE_X, STATUS_PANEL_Y);
     }
 
     private void drawBuyPanel() {
         buyPanel.drawFromTopLeft(0,0);
         //Drawing money
         moneyFont.drawString("$" + PlayerData.getInstance().getMoney(),level.getMap().getWidth()-200,65);
-        //Drawing key binds, again using random numbers I'm very sorry
-        keyBindFont.drawString("Key binds:", 500, 20);
-        keyBindFont.drawString("S - Start Wave:", 500, 45);
-        keyBindFont.drawString("L - Increase Timescale:", 500, 60);
-        keyBindFont.drawString("K - Decrease Timescale:", 500, 75);
+        keyBindFont.drawString("Key binds:", KEY_BIND_X, KEY_BIND_Y);
+        keyBindFont.drawString("S - Start Wave:", KEY_BIND_X, S_BIND_Y);
+        keyBindFont.drawString("L - Increase Timescale:", KEY_BIND_X, L_BIND_Y);
+        keyBindFont.drawString("K - Decrease Timescale:", KEY_BIND_X, K_BIND_Y);
         //Drawing towers and prices
-        //CURRENTLY NUMBERS FOR NOW BUT CAN CHANGE TO GET PRICE ONCE I ADD THE CLASSES
-        double mid = (buyPanel.getHeight()/2) - 10;
-        tankImage.draw(64, mid);
-        superTankImage.draw(184, mid);
-        airImage.draw(304, mid);
-        //EITHER DEFINE THESE NUMBERS OR GET IT FROM CLASS
+        double mid = (buyPanel.getHeight()/2) - BUY_OFFSET;
+        tankImage.draw(ITEM_OFFSET, mid);
+        superTankImage.draw(ITEM_GAP+ ITEM_OFFSET, mid);
+        airImage.draw(ITEM_GAP + ITEM_GAP+ ITEM_OFFSET, mid);
         drawTowerCost();
     }
 
     private void drawTowerCost() {
         int currentMoney = PlayerData.getInstance().getMoney();
-        if ( currentMoney >= 250) {
-            towerFont.drawString("$250", 32, 90, option.setBlendColour(Colour.GREEN));
+        if ( currentMoney >= TANKPRICE) {
+            towerFont.drawString("$" + TANKPRICE, TOWER_X, TOWER_Y, option.setBlendColour(Colour.GREEN));
         } else {
-            towerFont.drawString("$250", 32, 90, option.setBlendColour(Colour.RED));
+            towerFont.drawString("$" + TANKPRICE, TOWER_X, TOWER_Y, option.setBlendColour(Colour.RED));
         }
 
-        if ( currentMoney >= 600) {
-            towerFont.drawString("$600", 152, 90, option.setBlendColour(Colour.GREEN));
+        if ( currentMoney >= SUPERTANKPRICE) {
+            towerFont.drawString("$" + SUPERTANKPRICE, TOWER_X + ITEM_GAP, TOWER_Y,
+                    option.setBlendColour(Colour.GREEN));
         } else {
-            towerFont.drawString("$600", 152, 90, option.setBlendColour(Colour.RED));
+            towerFont.drawString("$" + SUPERTANKPRICE, TOWER_X + ITEM_GAP, TOWER_Y,
+                    option.setBlendColour(Colour.RED));
         }
 
-        if ( currentMoney >= 500) {
-            towerFont.drawString("$500", 272, 90, option.setBlendColour(Colour.GREEN));
+        if ( currentMoney >= AIRPLANEPRICE) {
+            towerFont.drawString("$" + AIRPLANEPRICE, TOWER_X + ITEM_GAP + ITEM_GAP,
+                    TOWER_Y, option.setBlendColour(Colour.GREEN));
         } else {
-            towerFont.drawString("$500", 272, 90, option.setBlendColour(Colour.RED));
+            towerFont.drawString("$" + AIRPLANEPRICE, TOWER_X + ITEM_GAP + ITEM_GAP,
+                    TOWER_Y, option.setBlendColour(Colour.RED));
         }
 
     }
+
 }

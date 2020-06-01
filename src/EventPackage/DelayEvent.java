@@ -1,27 +1,44 @@
 package EventPackage;
+import PlayerPackage.PlayerData;
+
 import java.util.List;
 
+/**
+ * Creates a delay event that makes the game do nothing for a set amount of time
+ */
 public class DelayEvent extends WaveEvent {
 
     private int  delayTime, time;
 
+    /**
+     * Constructor for delay event
+     * Reads in how long the event should delay for
+     * @param waveData takes in a string to create a delay event
+     */
     public DelayEvent(String waveData[]){
         super(waveData);
         delayTime = Integer.parseInt(waveData[2]);
         time = -1;
     }
 
+    /**
+     * Starts the event by setting time and wave progress
+     * @param Path (required for spawn event but not used here)
+     */
     @Override
-    public void startWave(int timescale, List Path) {
+    public void startWaveEvent(List Path) {
         time = 0;
         super.waveInProgress();
     }
 
-    /*Ends wave when time is up*/
+    /**
+     * Updates the time and ends the wave event when the time is over
+     * @param path (required for spawn event but not used here)
+     */
     @Override
-    public void updateWave(int timescale, List path) {
+    public void updateWaveEvent( List path) {
         if(time <= delayTime && time >= 0) {
-            time+= timescale;
+            time+= PlayerData.getInstance().getTimescale();
             super.waveInProgress();
         }
 

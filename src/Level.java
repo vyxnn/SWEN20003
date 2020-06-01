@@ -1,49 +1,74 @@
 import EventPackage.*;
 import PlayerPackage.*;
+import bagel.Input;
 import bagel.Window;
 import bagel.map.TiledMap;
+import bagel.util.Point;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Starts a single level
+ */
 public class Level {
+    //Bottom bound for purchasing an item
+    private static final int PANEL_Y = 100;
     //Rewards for the wave
     private static final int BASEREWARD = 150;
     private static final int WAVEINCREMENT = 100;
 
-    private int timescale, levelNum, waveNum, eventIndex;
+    private int levelNum, waveNum, eventIndex;
     private TiledMap map;
-    //change events name
+    private List path;
     private ArrayList<Integer> eventIndexList = new ArrayList<>();
     private ArrayList<WaveEvent> waveEventList = new ArrayList<>();
-    private List path;
+    private TowerHandler towerHandler;
 
+    /**
+     * Constructs a level given a level number
+     * @param levelNum the number of the level
+     */
     public Level(int levelNum){
         this.levelNum = levelNum;
         waveNum = 0;
         eventIndex = -1;
-        //Gets map and wave data for specific level
+        //Gets map for the specific level
         if (this.levelNum == 1) {
             map = new TiledMap("res/levels/1.tmx");
         }
         else {
             map = new TiledMap("res/levels/2.tmx");
-            //readData("res/levels/waves2.txt");
         }
 
+        //Scans in the wave data, path and sets the timescale to 1
         readData("res/levels/waves.txt");
         path = map.getAllPolylines().get(0);
-        timescale = ShadowDefend.INITIALTIMESCALE;
+        //Creates a new tower handler to deal with the placements of towers
+        towerHandler = new TowerHandler();
     }
 
-    //Insert your own level and map and file
+    /**
+     * Not used in this project, but can customise and add your own level, map and wave data
+     * @param levelNum pass in the level number
+     * @param map pass in the map
+     * @param file pass in the file data
+     */
     public Level(int levelNum, TiledMap map, String file){
+        //Follows same logic as the original constructor
+        waveNum = 0;
+        eventIndex = -1;
         this.levelNum = levelNum;
         this.map = map;
         readData(file);
+        path = map.getAllPolylines().get(0);
     }
 
+    /**
+     * Draws the map of the level
+     */
     public void drawMap(){
         map.draw(0, 0, 0, 0, Window.getWidth(), Window.getHeight());
     }
@@ -52,6 +77,10 @@ public class Level {
         return path;
     }
 
+    /**
+     * Returns the map of the level
+     * @return TiledMap
+     */
     public TiledMap getMap(){
         return map;
     }
@@ -89,39 +118,34 @@ public class Level {
         }
     }
 
-    public void increaseTimescale(){
-        timescale++;
-    }
-
-    public void decreaseTimescale(){
-        if (timescale>1) {
-            timescale--;
-        }
-    }
-
-    public int getTimescale(){
-        return timescale;
-    }
-
+    /**
+     * Starts a Wave (after S is pressed in the ShadowDefend class)
+     */
     public void startWave(){
         waveNum++;
         startWaveEvent();
     }
 
+    //Starts a wave event
     private void startWaveEvent(){
         eventIndex++;
         eventIndexList.add(eventIndex);
         if(waveEventList.get(eventIndex).getWaveNumber() == waveNum) {
-            waveEventList.get(eventIndex).startWave(timescale, path);
+            waveEventList.get(eventIndex).startWaveEvent(path);
         }
     }
 
-    // want to make it keep drawing for all active wave events
+    /**
+     * Updates the level 60 times per second
+     * Called by the update method in ShadowDefend Class
+     */
     public void updateLevel() {
+        //Draws tower
+        towerHandler.updateTowerList();
         //Updates position for each active wave event
         for(Integer eIndex : eventIndexList) {
             if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {
-                waveEventList.get(eIndex).updateWave(timescale, path);
+                waveEventList.get(eIndex).updateWaveEvent(path);
             }
         }
 
@@ -148,17 +172,28 @@ public class Level {
             eventIndexList.removeAll(eventIndexList);
             PlayerData.getInstance().addMoney(BASEREWARD + waveNum*WAVEINCREMENT);
         }
+
     }
 
+    /**
+     * Ends the level?
+     */
     public void endLevel(){
 
     }
 
-
+    /**
+     * Returns the current wave number for printing in status panel
+     * @return wave number
+     */
     public int getWaveNum(){
         return waveNum;
     }
 
+    /**
+     * Returns the wave progress of current wave for status panel
+     * @return wave progress
+     */
     public String getWaveProgress(){
         //If there is an active wave event, returns said wave progress
         if(eventIndex >= 0 && !eventIndexList.isEmpty()) {
@@ -172,4 +207,43 @@ public class Level {
         }
     }
 
+    public String getTowerProgress(){
+        return towerHandler.getPlacing();
+    }
+
+    public void setTowerProgress(String progress){
+        towerHandler.setPlacing(progress);
+    }
+
+    public void drawTowerView(Input input){
+        towerHandler.drawTowerView(map, input);
+    }
+
+    public void placeTower(Input input){
+        towerHandler.placeTower(map, input);
+    }
+    //Checks where the position of the mouse is, and creates a tank if valid
+    public void checkMouse(Input input) {
+        //Check that mouse position is valid
+        Point mousePos = input.getMousePosition();
+        //If the mouse is in the tank area, and has enough funds will place
+        if(mousePos.x > 0 && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 ) && mousePos.y > 0
+                && mousePos.y < PANEL_Y && PlayerData.getInstance().getMoney() >= ShadowDefend.TANKPRICE){
+            towerHandler.setPlacing(ShadowDefend.TANK);
+        }
+        //If the mouse in the the supertank area
+        else if (mousePos.x > (ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2)
+                && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + ShadowDefend.ITEM_GAP)
+                && mousePos.y > 0 && mousePos.y < PANEL_Y
+                && PlayerData.getInstance().getMoney() >= ShadowDefend.SUPERTANKPRICE){
+            towerHandler.setPlacing(ShadowDefend.SUPERTANK);
+        }
+        //If the mouse is in the airplane area
+        else if (mousePos.x >(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + ShadowDefend.ITEM_GAP)
+                && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + 2* ShadowDefend.ITEM_GAP)
+                && mousePos.y > 0 && mousePos.y < PANEL_Y
+                && PlayerData.getInstance().getMoney() >= ShadowDefend.AIRPLANEPRICE) {
+            towerHandler.setPlacing(ShadowDefend.AIRPLANE);
+        }
+    }
 }

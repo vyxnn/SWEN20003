@@ -7,18 +7,19 @@ import bagel.util.Point;
 public abstract class AbstractTank {
     private int radius, cooldown, damage, time;
     private Point pPos;
-    private Image image;
+    private Image tankImage;
 
     public AbstractTank(Point point) {
         pPos = point;
     }
 
-    protected void setAttributes(Image image){
-        this.image = image;
+    protected void setAttributes(Image image, int radius, int cooldown, int damage){
+        tankImage = image;
+        this.radius = radius;
+        this.cooldown = cooldown;
+        this.damage = damage;
     }
 
-    public void renderIndicator(TiledMap map, Point mousePos){
-        
-    };
+    public abstract void drawTank();
 
 }

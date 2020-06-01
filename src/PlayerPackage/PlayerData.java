@@ -4,7 +4,7 @@ public class PlayerData {
     private static PlayerData playerDataInstance = null;
     private static int money;
     private static int life;
-
+    private static int timescale;
     //Constructor
     private PlayerData(){
         resetData();
@@ -30,6 +30,7 @@ public class PlayerData {
     public void resetData(){
         money = 500;
         life = 25;
+        timescale = 1;
     }
 
     public void loseLife(int penalty) {
@@ -44,5 +45,18 @@ public class PlayerData {
         this.money -= money;
     }
 
+    public void increaseTimescale() {
+        timescale++;
+    }
+
+    public void decreaseTimescale(){
+        if(timescale > 1) {
+            timescale--;
+        }
+    }
+
+    public int getTimescale(){
+        return timescale;
+    }
 }
 
