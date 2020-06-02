@@ -67,15 +67,14 @@ public class SpawnEvent extends WaveEvent {
         ListIterator<AbstractEnemy> itr = enemyList.listIterator();
         while(itr.hasNext()) {
             AbstractEnemy e = itr.next();
+            //Slicer is dead, will reward and spawn new enemies, removes dead enemy
+            if(e.getHealth() <= 0) {
+                e.enemyDeath(itr);
+            }
             //Updates and draws if slicer is still on path
             if(e.getIndex() + 1 < path.size()) {
                 e.updatePos((Point) path.get(e.getIndex() + 1));
                 e.drawImage();
-            }
-            //Slicer is dead, will reward and spawn new enemies, removes dead enemy
-            else if (e.getHealth() < 0) {
-                e.enemyDeath(itr, PlayerData.getInstance().getTimescale());
-                itr.remove();
             }
             //Reached end of map without death, will add penalty, removes enemies from map
             else {
@@ -114,19 +113,19 @@ public class SpawnEvent extends WaveEvent {
     /*Choosing a spawn type for the event*/
     private void addEnemy(int timescale, List path){
         if(enemyType.equals("slicer")) {
-            enemyList.add(new Slicer((Point) path.get(0), timescale));
+            enemyList.add(new Slicer((Point) path.get(0), timescale, 0));
         }
 
         else if (enemyType.equals("superslicer")) {
-            enemyList.add(new SuperSlicer((Point) path.get(0), timescale));
+            enemyList.add(new SuperSlicer((Point) path.get(0), timescale,0));
         }
 
         else if(enemyType.equals("megaslicer")) {
-            enemyList.add(new MegaSlicer((Point) path.get(0), timescale));
+            enemyList.add(new MegaSlicer((Point) path.get(0), timescale,0));
         }
 
         else if(enemyType.equals("apexslicer")) {
-            enemyList.add(new ApexSlicer((Point) path.get(0), timescale));
+            enemyList.add(new ApexSlicer((Point) path.get(0), timescale,0));
         }
         //Throws error?
         else {

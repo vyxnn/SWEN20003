@@ -1,5 +1,6 @@
 package TowerPackage;
 
+import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
 
@@ -14,12 +15,7 @@ public class Tank extends AbstractTank{
         pos = point;
         tankImage = new Image("res/images/tank.png");
         tankProjImage = new Image("res/images/tank_projectile.png");
-        super.setAttributes(tankImage, radius, cooldown, damage);
-    }
-
-    @Override
-    public void drawTank() {
-        tankImage.draw(pos.x, pos.y);
+        super.setAttributes(tankImage, tankProjImage, radius, cooldown, damage);
     }
 
 

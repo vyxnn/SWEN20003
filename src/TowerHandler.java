@@ -1,9 +1,11 @@
+import EnemyPackage.AbstractEnemy;
 import PlayerPackage.*;
 import TowerPackage.*;
 import bagel.Image;
 import bagel.Input;
 import bagel.map.TiledMap;
 import bagel.util.Point;
+import bagel.util.Rectangle;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class TowerHandler {
     private ArrayList<Airplane> airplaneList = new ArrayList();
 
     public TowerHandler(){
-        placing = "false";
+        placing = ShadowDefend.FALSE;
     }
 
     public void setPlacing(String placing){
@@ -44,8 +46,9 @@ public class TowerHandler {
 
     public void placeTower(TiledMap map, Input input){
         Point mousePos = input.getMousePosition();
-        //check that mouse Pos is not out of bounds
-        if (!map.hasProperty((int)mousePos.x, (int)mousePos.y, BLOCKED)){
+        //check that mouse Pos is not out of bounds and not intersected with a panel
+        if (!map.hasProperty((int)mousePos.x, (int)mousePos.y, BLOCKED) && mousePos.y > Level.BUYHEIGHT
+                && mousePos.y < (map.getHeight()-Level.STATUSHEIGHT - ShadowDefend.ITEM_OFFSET/2)){
             if (placing.equals(ShadowDefend.TANK)) {
                 tankList.add(new Tank(mousePos));
                 PlayerData.getInstance().loseMoney(ShadowDefend.TANKPRICE);
@@ -62,12 +65,31 @@ public class TowerHandler {
         }
     }
 
-    public void updateTowerList(){
+    public void updateTower(){
         for(AbstractTank t: tankList){
             if (t == null) {
                 break;
             }
             t.drawTank();
+            t.updateTime();
         }
     }
+
+    public void updateTowerList(ArrayList<AbstractEnemy> enemyList){
+        for(AbstractTank t: tankList){
+            if (t == null) {
+                break;
+            }
+            //From these calculations should get a rectangle with tank in the centre
+            Rectangle tankRange = new Rectangle(t.getPos().x - t.getRadius()/2, t.getPos().y - t.getRadius()/2,
+                    t.getRadius(), t.getRadius());
+            //If the enemy intersects with a tank, will update and check it's range
+            for(AbstractEnemy e: enemyList) {
+                if(e.getBounds().intersects(tankRange)){
+                    t.updateTank(e);
+                }
+            }
+        }
+    }
+
 }

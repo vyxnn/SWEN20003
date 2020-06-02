@@ -1,4 +1,7 @@
 package EventPackage;
+import EnemyPackage.AbstractEnemy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +30,10 @@ public abstract class WaveEvent {
      */
     public String getWaveProgress(){
         return waveProgress;
+    }
+
+    public String getEventType(){
+        return eventType;
     }
 
     /**
@@ -70,4 +77,6 @@ public abstract class WaveEvent {
      * @param path level's path to follow
      */
     public abstract void updateWaveEvent(List path);
+
+    public abstract ArrayList<AbstractEnemy> getEnemyList();
 }

@@ -7,13 +7,14 @@ import PlayerPackage.*;
 import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
+import bagel.util.Rectangle;
 import bagel.util.Vector2;
 import java.util.ListIterator;
 import static java.lang.Math.atan2;
 
 public abstract class AbstractEnemy {
 
-    DrawOptions option = new DrawOptions();
+    private DrawOptions option = new DrawOptions();
     private static final int THRESHOLD = 1;
     private Vector2 vPos;
     private int index;
@@ -23,23 +24,23 @@ public abstract class AbstractEnemy {
     private int penalty, health;
     private double defaultSpeed;
 
-    public AbstractEnemy(Point point, int timescale){
+    public AbstractEnemy(Point point, int timescale, int index){
         vPos = new Vector2(point.x, point.y);
         angle = atan2(point.y, point.x);
-        index = 0;
+        this.index = index;
     }
 
     //Getters and Setters
     public int getIndex(){
         return index;
     }
-
     public Point getPoint(){
         return vPos.asPoint();
     }
     public int getHealth(){
         return health;
     }
+
     //Don't actually need any of the details aside from speed in here
     protected void setAttributes(double defaultSpeed, int timescale, int penalty, int health){
         this.defaultSpeed = defaultSpeed;
@@ -59,7 +60,6 @@ public abstract class AbstractEnemy {
         //Changes how far it will move based on current speed, then updates position
         vTow = vTow.mul(speed);
         vPos = vPos.add(vTow);
-
         /*Checks if point has been reached, and increments index to next point if it has
           As long as the positions are within 1px*currentSpeed then will move to next point*/
         if((Math.abs(vPos.x - towards.x) < speed*THRESHOLD) && (Math.abs(vPos.y - towards.y) < speed*THRESHOLD) ) {
@@ -77,12 +77,14 @@ public abstract class AbstractEnemy {
         enemy.draw(vPos.x, vPos.y, option.setRotation(angle));
     }
 
+    public void hit(int damage){
+        health -= damage;
+    }
+
     public void enemyPenalty(){
         PlayerData.getInstance().loseLife(penalty);
     }
-
     public abstract void drawImage();
-    public abstract void enemyDeath(ListIterator enemyList, int timescale);
-    //get health as a public abstract void?
-
+    public abstract void enemyDeath(ListIterator enemyList);
+    public abstract Rectangle getBounds();
 }

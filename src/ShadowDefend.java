@@ -35,7 +35,8 @@ public class ShadowDefend <map> extends AbstractGame {
     public final static String AIRPLANE = "airplane";
     public final static String FALSE = "false";
     //Objects and variables
-    private final Image buyPanel, statusPanel;
+    private final Image buyPanel;
+    private final Image statusPanel;
     private final Image tankImage, superTankImage, airImage;
     private final Font statusFont, moneyFont, keyBindFont, towerFont;
     private DrawOptions option = new DrawOptions();
@@ -84,7 +85,9 @@ public class ShadowDefend <map> extends AbstractGame {
 
         //Checks if there is an item being placed, and renders it where the mouse is
         if (!level.getTowerProgress().equals(false)) {
-            level.drawTowerView(input);
+            if(checkMousePos(input)) {
+                level.drawTowerView(input);
+            }
         }
 
         //Starts a wave if one is not in progress
@@ -105,7 +108,9 @@ public class ShadowDefend <map> extends AbstractGame {
         }
         //If left mouse button was pressed, and there is a tower being placed, will place the item
         if (input.wasPressed(MouseButtons.LEFT) && !level.getTowerProgress().equals(FALSE)) {
-            level.placeTower(input);
+           if(checkMousePos(input)) {
+                level.placeTower(input);
+            }
         }
 
         //If left mouse button was pressed, and there is no current tower being placed, create new tower to place
@@ -186,4 +191,12 @@ public class ShadowDefend <map> extends AbstractGame {
 
     }
 
+    private boolean checkMousePos(Input input){
+        Point mousePos = input.getMousePosition();
+        if (mousePos.y > level.getMap().getHeight() || mousePos.y < 0 ||
+                mousePos.x < 0 || mousePos.x > level.getMap().getWidth()) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -12,12 +12,7 @@ public class SuperTank extends AbstractTank{
         pos = point;
         superTankImage = new Image("res/images/supertank.png");
         superProjImage = new Image("res/images/supertank_projectile.png");
-        super.setAttributes(superTankImage, radius, cooldown, damage);
-    }
-
-    @Override
-    public void drawTank() {
-        superTankImage.draw(pos.x, pos.y);
+        super.setAttributes(superTankImage, superProjImage, radius, cooldown, damage);
     }
 
 }

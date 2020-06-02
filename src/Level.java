@@ -1,5 +1,6 @@
 import EventPackage.*;
 import PlayerPackage.*;
+import bagel.Image;
 import bagel.Input;
 import bagel.Window;
 import bagel.map.TiledMap;
@@ -14,8 +15,13 @@ import java.util.List;
  * Starts a single level
  */
 public class Level {
-    //Bottom bound for purchasing an item
-    private static final int PANEL_Y = 100;
+    //Better way?
+    private final static Image buyPanel = new Image("res/images/buypanel.png");
+    private final static Image statusPanel = new Image("res/images/statuspanel.png");
+    public final static double BUYHEIGHT = buyPanel.getHeight();
+    public final static double STATUSHEIGHT = statusPanel.getHeight();
+    //private final double BUYWIDTH = buyPanel.getWidth();
+    //private final double STATUSWIDTH = statusPanel.getWidth();
     //Rewards for the wave
     private static final int BASEREWARD = 150;
     private static final int WAVEINCREMENT = 100;
@@ -140,12 +146,16 @@ public class Level {
      * Called by the update method in ShadowDefend Class
      */
     public void updateLevel() {
-        //Draws tower
-        towerHandler.updateTowerList();
+        //Draws tower and updates time
+        towerHandler.updateTower();
         //Updates position for each active wave event
         for(Integer eIndex : eventIndexList) {
             if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {
                 waveEventList.get(eIndex).updateWaveEvent(path);
+            }
+            //For each spawn event will check the list of enemies and target them
+            if(waveEventList.get(eIndex).getEventType().equals("spawn")) {
+                towerHandler.updateTowerList(waveEventList.get(eIndex).getEnemyList());
             }
         }
 
@@ -167,6 +177,7 @@ public class Level {
             }
             count++;
         }
+
         //Removes all current indexes and rewards money if it is
         if(count == eventIndexList.size() && !eventIndexList.isEmpty()) {
             eventIndexList.removeAll(eventIndexList);
@@ -195,6 +206,10 @@ public class Level {
      * @return wave progress
      */
     public String getWaveProgress(){
+        //Checks if a tower is being placed
+        if(!towerHandler.getPlacing().equals(ShadowDefend.FALSE)){
+            return "Placing";
+        }
         //If there is an active wave event, returns said wave progress
         if(eventIndex >= 0 && !eventIndexList.isEmpty()) {
             Integer lastIndex = eventIndexList.get(eventIndexList.size() - 1);
@@ -222,26 +237,27 @@ public class Level {
     public void placeTower(Input input){
         towerHandler.placeTower(map, input);
     }
+
     //Checks where the position of the mouse is, and creates a tank if valid
     public void checkMouse(Input input) {
         //Check that mouse position is valid
         Point mousePos = input.getMousePosition();
         //If the mouse is in the tank area, and has enough funds will place
         if(mousePos.x > 0 && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 ) && mousePos.y > 0
-                && mousePos.y < PANEL_Y && PlayerData.getInstance().getMoney() >= ShadowDefend.TANKPRICE){
+                && mousePos.y < BUYHEIGHT && PlayerData.getInstance().getMoney() >= ShadowDefend.TANKPRICE){
             towerHandler.setPlacing(ShadowDefend.TANK);
         }
         //If the mouse in the the supertank area
         else if (mousePos.x > (ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2)
                 && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + ShadowDefend.ITEM_GAP)
-                && mousePos.y > 0 && mousePos.y < PANEL_Y
+                && mousePos.y > 0 && mousePos.y < BUYHEIGHT
                 && PlayerData.getInstance().getMoney() >= ShadowDefend.SUPERTANKPRICE){
             towerHandler.setPlacing(ShadowDefend.SUPERTANK);
         }
         //If the mouse is in the airplane area
         else if (mousePos.x >(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + ShadowDefend.ITEM_GAP)
                 && mousePos.x <(ShadowDefend.ITEM_OFFSET + ShadowDefend.ITEM_GAP/2 + 2* ShadowDefend.ITEM_GAP)
-                && mousePos.y > 0 && mousePos.y < PANEL_Y
+                && mousePos.y > 0 && mousePos.y < BUYHEIGHT
                 && PlayerData.getInstance().getMoney() >= ShadowDefend.AIRPLANEPRICE) {
             towerHandler.setPlacing(ShadowDefend.AIRPLANE);
         }

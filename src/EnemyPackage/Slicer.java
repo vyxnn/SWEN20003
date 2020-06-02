@@ -2,6 +2,8 @@ package EnemyPackage;
 import PlayerPackage.*;
 import bagel.Image;
 import bagel.util.Point;
+import bagel.util.Rectangle;
+
 import java.util.ListIterator;
 
 public class Slicer extends AbstractEnemy {
@@ -10,8 +12,8 @@ public class Slicer extends AbstractEnemy {
     private int health = 1, reward = 2, penalty = 1;
 
     //Constructor for slicer
-    public Slicer(Point point, int timescale) {
-        super(point, timescale);
+    public Slicer(Point point, int timescale, int index) {
+        super(point, timescale, index);
         setAttributes(defaultSpeed, timescale, penalty, health);
         slicerImage = new Image("res/images/slicer.png");
     }
@@ -23,8 +25,14 @@ public class Slicer extends AbstractEnemy {
     }
 
     @Override
-    public void enemyDeath(ListIterator enemyList, int timescale) {
+    public void enemyDeath(ListIterator enemyList) {
         PlayerData.getInstance().addMoney(reward);
+        enemyList.remove();
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return slicerImage.getBoundingBoxAt(super.getPoint());
     }
 
 }
