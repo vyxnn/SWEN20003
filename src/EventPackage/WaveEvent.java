@@ -1,5 +1,6 @@
 package EventPackage;
 import EnemyPackage.AbstractEnemy;
+import MainPackage.ShadowDefend;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +47,15 @@ public abstract class WaveEvent {
     }
 
     protected void waveInProgress(){
-        waveProgress = "Wave in Progress";
+        waveProgress = ShadowDefend.INPROGRESS;
     }
 
     protected void waveOver(){
-        waveProgress = "Awaiting Start";
+        waveProgress = ShadowDefend.AWAITING;
     }
 
     protected void eventOver(){
-        eventProgress = "Event Over";
+        eventProgress = ShadowDefend.EVENTOVER;
     }
 
     /**

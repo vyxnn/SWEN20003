@@ -28,7 +28,7 @@ public class PlayerData {
 
     //Sets initial values, as well as used when resetting a level
     public void resetData(){
-        money = 500000;
+        money = 500;
         life = 25;
         timescale = 1;
     }

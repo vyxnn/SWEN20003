@@ -9,9 +9,31 @@ import bagel.util.Point;
  * @param <map>
  */
 public class ShadowDefend <map> extends AbstractGame {
-    //
+    /**
+     * Public final attributes to be accessed from multiple classes
+     * Chosen to be public so it is only required to be changed in one place rather than redefining
+     */
+    //Universally used
     public static final int TOSECONDS = 1000;
     public static final int FPS = 60;
+    //Item placements
+    public final static int ITEM_OFFSET = 64;
+    public final static int ITEM_GAP = 120;
+    //Tank prices
+    public final static int TANKPRICE = 250;
+    public final static int SUPERTANKPRICE = 600;
+    public final static int AIRPLANEPRICE = 500;
+    //Keywords for the status of placing
+    public final static String TANK = "tank";
+    public final static String SUPERTANK = "supertank";
+    public final static String AIRPLANE = "airplane";
+    public final static String FALSE = "false";
+    public final static String INPROGRESS = "Wave in Progress";
+    public final static String AWAITING = "Awaiting Start";
+    public final static String PLACING = "Placing";
+    public final static String EVENTOVER = "Event Over";
+    public final static String WINNER = "Winner!";
+
     //Definitions for all the panel placements
     private final static int TIMESCALE_X = 260;
     private final static int STATUS_PANEL_Y = 752;
@@ -26,23 +48,6 @@ public class ShadowDefend <map> extends AbstractGame {
     private final static int BUY_OFFSET = 10;
     private final static int TOWER_Y = 90;
     private final static int TOWER_X = 32;
-    /**
-     * Public final attributes to be accessed from multiple classes
-     * Chosen to be public so it is only required to be changed in one place rather than redefining
-     */
-    //Item placements
-    public final static int ITEM_OFFSET = 64;
-    public final static int ITEM_GAP = 120;
-    //Tank prices
-    public final static int TANKPRICE = 250;
-    public final static int SUPERTANKPRICE = 600;
-    public final static int AIRPLANEPRICE = 500;
-    //Keywords for the status of placing
-    public final static String TANK = "tank";
-    public final static String SUPERTANK = "supertank";
-    public final static String AIRPLANE = "airplane";
-    public final static String FALSE = "false";
-    public final static String AWAITING = "Awaiting Start";
     //Objects and variables
     private final Image buyPanel;
     private final Image statusPanel;
@@ -50,6 +55,7 @@ public class ShadowDefend <map> extends AbstractGame {
     private final Font statusFont, moneyFont, keyBindFont, towerFont;
     private DrawOptions option = new DrawOptions();
     private Level level;
+    private int lastLevel = 2;
 
     /**
      * Entry point for Bagel game
@@ -100,9 +106,20 @@ public class ShadowDefend <map> extends AbstractGame {
             }
         }
 
+        //If end of level is true, then start a new level
+        if(level.checkLevelProgress() && level.getLevelNum()!= lastLevel){
+            level = new Level(level.getLevelNum() + 1);
+            PlayerData.getInstance().resetData();
+        }
+
         //Starts a wave if one is not in progress
-        if (input.wasPressed(Keys.S) && level.getWaveProgress().equals("Awaiting Start")) {
+        if (input.wasPressed(Keys.S) && level.getWaveProgress().equals(ShadowDefend.AWAITING)) {
             level.startWave();
+        }
+
+
+        if(level.checkLevelProgress() && level.getLevelNum() == lastLevel){
+            level.Winner();
         }
 
         //Input functions
@@ -131,8 +148,8 @@ public class ShadowDefend <map> extends AbstractGame {
             level.setTowerProgress(FALSE);
         }
 
-        //Ending the wave/window
-        if (input.isDown(Keys.ESCAPE)) {
+        //Ending the window if esc is pressed, or all lives are lost
+        if (input.isDown(Keys.ESCAPE) || PlayerData.getInstance().getLife() < 0) {
             Window.close();
         }
 

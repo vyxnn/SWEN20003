@@ -95,7 +95,7 @@ public class SpawnEvent extends WaveEvent {
 
     private void updateProgress(){
         /*Ends wave if all enemies are dead or left the map*/
-        if(enemyList.isEmpty()) {
+        if(enemyList.isEmpty() && spawned == spawnNumber) {
             super.waveOver();
         }
         /*Ends wave event if there is no more enemies to spawn*/

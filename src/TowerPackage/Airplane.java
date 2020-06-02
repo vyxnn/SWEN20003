@@ -65,7 +65,6 @@ public class Airplane {
         if (waiting.equals("YES")) {
             Random random = new Random();
             cooldown = random.nextInt(LAUNCH);
-            System.out.println(cooldown);
             waiting = "NO";
         }
         //Adds explosive if cooldown is over, resets cooldown

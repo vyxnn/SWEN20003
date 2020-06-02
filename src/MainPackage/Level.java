@@ -24,8 +24,12 @@ public class Level {
     //Rewards for the wave
     private static final int BASEREWARD = 150;
     private static final int WAVEINCREMENT = 100;
-
-    private int levelNum, waveNum, eventIndex;
+    //Keywords for event types
+    private static final String SPAWN = "spawn";
+    private static final String DELAY = "delay";
+    //Other variables
+    private int levelNum, waveNum, eventIndex, indexCount;
+    private String waveStatus;
     private TiledMap map;
     private List path;
     private ArrayList<Integer> eventIndexList = new ArrayList<>();
@@ -39,6 +43,7 @@ public class Level {
      */
     public Level(int levelNum){
         this.levelNum = levelNum;
+        waveStatus = ShadowDefend.AWAITING;
         waveNum = 0;
         eventIndex = -1;
         //Gets map for the specific level
@@ -79,14 +84,6 @@ public class Level {
         map.draw(0, 0, 0, 0, Window.getWidth(), Window.getHeight());
     }
 
-    /**
-     * Returns the map of the level
-     * @return TiledMap
-     */
-    public TiledMap getMap(){
-        return map;
-    }
-
     //Reads from a file into an ArrayList of Strings
     private void readData(String file){
         ArrayList<String> eventString = new ArrayList<>();
@@ -95,6 +92,7 @@ public class Level {
             String text = null;
             while ((text = br.readLine()) != null) {
                 eventString.add(text);
+                indexCount++;
             }
         }
         catch (Exception e) {
@@ -107,9 +105,9 @@ public class Level {
     private void createList(ArrayList<String> eventString){
         for(String s: eventString) {
             String tmp[] = s.split(",");
-            if (tmp[1].equals("delay")) {
+            if (tmp[1].equals(DELAY)) {
                 waveEventList.add(new DelayEvent(tmp));
-            } else if (tmp[1].equals("spawn")) {
+            } else if (tmp[1].equals(SPAWN)) {
                 waveEventList.add(new SpawnEvent(tmp));
             }
             //Do the throws/exceptions when reading
@@ -129,10 +127,12 @@ public class Level {
 
     //Starts a wave event
     private void startWaveEvent(){
-        eventIndex++;
-        eventIndexList.add(eventIndex);
-        if(waveEventList.get(eventIndex).getWaveNumber() == waveNum) {
-            waveEventList.get(eventIndex).startWaveEvent(path);
+        if (eventIndex < indexCount) {
+            eventIndex++;
+            eventIndexList.add(eventIndex);
+            if(waveEventList.get(eventIndex).getWaveNumber() == waveNum) {
+                waveEventList.get(eventIndex).startWaveEvent(path);
+            }
         }
     }
 
@@ -141,18 +141,18 @@ public class Level {
      * Called by the update method in ShadowDefend Class
      */
     public void updateLevel() {
-        //Draws tower and updates time
-        towerHandler.drawTower();
         //Updates position for each active wave event
         for(Integer eIndex : eventIndexList) {
-            if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {
+            if (waveEventList.get(eIndex).getWaveProgress().equals(ShadowDefend.INPROGRESS)) {
                 waveEventList.get(eIndex).updateWaveEvent(path);
             }
             //For each will get all the active enemies and add them to the list
-            if(waveEventList.get(eIndex).getEventType().equals("spawn")) {
+            if(waveEventList.get(eIndex).getEventType().equals(SPAWN)) {
                 activeEnemyList.addAll(waveEventList.get(eIndex).getEnemyList());
             }
         }
+        //Draws tower and updates time
+        towerHandler.drawTower();
         //Targets enemies according to the active enemy list
         towerHandler.updateTankList(activeEnemyList);
         towerHandler.updateAirplaneList(activeEnemyList, map);
@@ -163,7 +163,7 @@ public class Level {
         if(eventIndexList.size() >= 1) {
             Integer lastIndex = eventIndexList.get(eventIndexList.size() - 1);
             if (lastIndex < waveEventList.size() -1
-                    && waveEventList.get(lastIndex).getEventProgress().equals("Event Over")
+                    && waveEventList.get(lastIndex).getEventProgress().equals(ShadowDefend.EVENTOVER)
                     && waveEventList.get(lastIndex + 1).getWaveNumber() == waveNum) {
                 startWaveEvent();
             }
@@ -173,6 +173,7 @@ public class Level {
         int count = 0;
         for(Integer eIndex : eventIndexList){
             if(!waveEventList.get(eIndex).getWaveProgress().equals(ShadowDefend.AWAITING)) {
+                waveStatus = ShadowDefend.INPROGRESS;
                 break;
             }
             count++;
@@ -181,61 +182,10 @@ public class Level {
         //Removes all current indexes and rewards money if it is
         if(count == eventIndexList.size() && !eventIndexList.isEmpty()) {
             eventIndexList.removeAll(eventIndexList);
+            waveStatus = ShadowDefend.AWAITING;
             PlayerData.getInstance().addMoney(BASEREWARD + waveNum*WAVEINCREMENT);
         }
 
-    }
-
-    /**
-     * Ends the level?
-     */
-    public void endLevel(){
-
-    }
-
-    /**
-     * Returns the current wave number for printing in status panel
-     * @return wave number
-     */
-    public int getWaveNum(){
-        return waveNum;
-    }
-
-    /**
-     * Returns the wave progress of current wave for status panel
-     * @return wave progress
-     */
-    public String getWaveProgress(){
-        //Checks if a tower is being placed
-        if(!towerHandler.getPlacing().equals(ShadowDefend.FALSE)){
-            return "Placing";
-        }
-        //If there is an active wave event, returns said wave progress
-        if(eventIndex >= 0 && !eventIndexList.isEmpty()) {
-            Integer lastIndex = eventIndexList.get(eventIndexList.size() - 1);
-            return waveEventList.get(lastIndex).getWaveProgress();
-        }
-
-        //Default
-        else {
-            return ShadowDefend.AWAITING;
-        }
-    }
-
-    public String getTowerProgress(){
-        return towerHandler.getPlacing();
-    }
-
-    public void setTowerProgress(String progress){
-        towerHandler.setPlacing(progress);
-    }
-
-    public void drawTowerView(Input input){
-        towerHandler.drawTowerView(map, input);
-    }
-
-    public void placeTower(Input input){
-        towerHandler.placeTower(map, input);
     }
 
     //Checks where the position of the mouse is, and creates a tank if valid
@@ -262,4 +212,76 @@ public class Level {
             towerHandler.setPlacing(ShadowDefend.AIRPLANE);
         }
     }
+
+    public void Winner(){
+        waveStatus = ShadowDefend.WINNER;
+    }
+
+    public boolean checkLevelProgress(){
+        if(eventIndex == indexCount-1 && getWaveProgress().equals(ShadowDefend.AWAITING)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int getLevelNum(){
+        return levelNum;
+    }
+
+    /**
+     * Returns the current wave number for printing in status panel
+     * @return wave number
+     */
+    public int getWaveNum(){
+        return waveNum;
+    }
+
+    /**
+     * Returns the map of the level
+     * @return TiledMap
+     */
+    public TiledMap getMap(){
+        return map;
+    }
+
+    /**
+     * Returns the wave progress of current wave for status panel
+     * @return wave progress
+     */
+    public String getWaveProgress(){
+        if(waveStatus.equals(ShadowDefend.WINNER)) {
+            return ShadowDefend.WINNER;
+        }
+        //Checks if a tower is being placed
+        if(!towerHandler.getPlacing().equals(ShadowDefend.FALSE)){
+            return ShadowDefend.PLACING;
+        }
+        //If there is an active wave event, returns said wave progress
+        if(waveStatus.equals(ShadowDefend.INPROGRESS)) {
+            return ShadowDefend.INPROGRESS;
+        }
+        //Default
+        else {
+            return ShadowDefend.AWAITING;
+        }
+    }
+
+    public String getTowerProgress(){
+        return towerHandler.getPlacing();
+    }
+
+    public void setTowerProgress(String progress){
+        towerHandler.setPlacing(progress);
+    }
+
+    public void drawTowerView(Input input){
+        towerHandler.drawTowerView(map, input);
+    }
+
+    public void placeTower(Input input){
+        towerHandler.placeTower(map, input);
+    }
+
 }
