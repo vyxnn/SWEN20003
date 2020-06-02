@@ -22,14 +22,18 @@ public class ShadowDefend <map> extends AbstractGame {
     private final static int BUY_OFFSET = 10;
     private final static int TOWER_Y = 90;
     private final static int TOWER_X = 32;
-    //Public so I can access from other classes and change in one place only
+    /**
+     * Public final attributes to be accessed from multiple classes
+     * Chosen to be public so it is only required to be changed in one place rather than redefining
+     */
+    //Item placements
     public final static int ITEM_OFFSET = 64;
     public final static int ITEM_GAP = 120;
     //Tank prices
     public final static int TANKPRICE = 250;
     public final static int SUPERTANKPRICE = 600;
     public final static int AIRPLANEPRICE = 500;
-    //Others
+    //Keywords for the status of placing
     public final static String TANK = "tank";
     public final static String SUPERTANK = "supertank";
     public final static String AIRPLANE = "airplane";
@@ -82,6 +86,7 @@ public class ShadowDefend <map> extends AbstractGame {
         level.drawMap();
         drawStatusPanel();
         drawBuyPanel();
+        level.updateLevel();
 
         //Checks if there is an item being placed, and renders it where the mouse is
         if (!level.getTowerProgress().equals(false)) {
@@ -94,8 +99,6 @@ public class ShadowDefend <map> extends AbstractGame {
         if (input.wasPressed(Keys.S) && level.getWaveProgress().equals("Awaiting Start")) {
             level.startWave();
         }
-
-        level.updateLevel();
 
         //Input functions
         //Increasing/Decreasing global timescale
@@ -130,6 +133,7 @@ public class ShadowDefend <map> extends AbstractGame {
 
     }
 
+    //Draws the status panel and its features
     private void drawStatusPanel() {
         statusPanel.drawFromTopLeft(level.getMap().getWidth() - statusPanel.getWidth(),
                 level.getMap().getHeight() - statusPanel.getHeight());
@@ -149,6 +153,7 @@ public class ShadowDefend <map> extends AbstractGame {
         statusFont.drawString("Lives: " + PlayerData.getInstance().getLife(), LIFE_X, STATUS_PANEL_Y);
     }
 
+    //Draws the buy panel and it's features
     private void drawBuyPanel() {
         buyPanel.drawFromTopLeft(0,0);
         //Drawing money
@@ -165,6 +170,7 @@ public class ShadowDefend <map> extends AbstractGame {
         drawTowerCost();
     }
 
+    //Draws the costs of each tower and marks it red or green depending on the funds
     private void drawTowerCost() {
         int currentMoney = PlayerData.getInstance().getMoney();
         if ( currentMoney >= TANKPRICE) {
@@ -191,6 +197,7 @@ public class ShadowDefend <map> extends AbstractGame {
 
     }
 
+    //Only places/renders towers if the mouse position is within the map
     private boolean checkMousePos(Input input){
         Point mousePos = input.getMousePosition();
         if (mousePos.y > level.getMap().getHeight() || mousePos.y < 0 ||

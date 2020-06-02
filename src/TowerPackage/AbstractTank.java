@@ -6,10 +6,8 @@ import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Vector2;
-
 import java.util.ArrayList;
 import java.util.ListIterator;
-
 import static java.lang.Math.atan2;
 
 public abstract class AbstractTank {
@@ -60,19 +58,23 @@ public abstract class AbstractTank {
         }
     }
 
-    //Draws tank normally
+    //Draws tank with last angle value
     public void drawTank(){
         tankImage.draw(pPos.x, pPos.y, option.setRotation(angle));
     }
 
     //Draws tank if moving to face an enemy
     public void drawTank(AbstractEnemy enemy){
+        //Vector calculations to face the enemy
         Point ePos = enemy.getPoint();
         Vector2 vEnemy = new Vector2(ePos.x, ePos.y);
         Vector2 vPos = new Vector2(pPos.x, pPos.y);
         vPos = vPos.sub(vEnemy);
-        angle = atan2(vPos.x, vPos.y);
-        angle = angle + Math.PI/2;
+        //Ended up calculating angle from enemy to tank rather than other way around
+        angle = atan2(vPos.y, vPos.x);
+        //Angle adjustment from my weird vector calculations
+        angle += 3*Math.PI/2;
+        //Draws the tank in the direction of the tank facing enemy
         tankImage.draw(pPos.x, pPos.y, option.setRotation(angle));
     }
 

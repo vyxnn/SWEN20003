@@ -9,6 +9,9 @@ import bagel.util.Rectangle;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the towers for each level 
+ */
 public class TowerHandler {
     private String placing;
     private final static String BLOCKED = "blocked";
@@ -65,6 +68,9 @@ public class TowerHandler {
         }
     }
 
+    /**
+     * Draws the tower and updates the time (cooldown) for each frame
+     */
     public void updateTower(){
         for(AbstractTank t: tankList){
             if (t == null) {
@@ -75,6 +81,10 @@ public class TowerHandler {
         }
     }
 
+    /**
+     * Locates the first enemy in the list and targets if it is within the radius
+     * @param enemyList
+     */
     public void updateTowerList(ArrayList<AbstractEnemy> enemyList){
         for(AbstractTank t: tankList){
             if (t == null) {

@@ -15,7 +15,7 @@ import java.util.List;
  * Starts a single level
  */
 public class Level {
-    //Better way?
+    //Better way? Don't want to redefine but not sure about another way around it
     private final static Image buyPanel = new Image("res/images/buypanel.png");
     private final static Image statusPanel = new Image("res/images/statuspanel.png");
     public final static double BUYHEIGHT = buyPanel.getHeight();
@@ -79,10 +79,6 @@ public class Level {
         map.draw(0, 0, 0, 0, Window.getWidth(), Window.getHeight());
     }
 
-    public List getPath(){
-        return path;
-    }
-
     /**
      * Returns the map of the level
      * @return TiledMap
@@ -116,7 +112,6 @@ public class Level {
             } else if (tmp[1].equals("spawn")) {
                 waveEventList.add(new SpawnEvent(tmp));
             }
-
             //Do the throws/exceptions when reading
             else {
                 System.out.println("error");
