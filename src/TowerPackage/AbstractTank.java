@@ -1,5 +1,5 @@
 package TowerPackage;
-
+import MainPackage.*;
 import EnemyPackage.*;
 import PlayerPackage.PlayerData;
 import bagel.DrawOptions;
@@ -11,8 +11,6 @@ import java.util.ListIterator;
 import static java.lang.Math.atan2;
 
 public abstract class AbstractTank {
-    private static final int TOSECONDS = 1000;
-    private static final int FPS = 60;
     private int radius, cooldown, damage;
     private Point pPos;
     private Image tankImage , projImage;
@@ -40,7 +38,7 @@ public abstract class AbstractTank {
 
     public void updateTank(AbstractEnemy enemy){
         //Adds new projectile and resets time
-        if (time >= cooldown*FPS/TOSECONDS){
+        if (time >= cooldown*ShadowDefend.FPS/ShadowDefend.TOSECONDS){
             drawTank(enemy);
             projectileList.add(new Projectile(projImage, damage, pPos, enemy));
             time = 0;

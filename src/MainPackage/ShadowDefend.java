@@ -1,3 +1,4 @@
+package MainPackage;
 import bagel.*;
 import bagel.util.Colour;
 import PlayerPackage.*;
@@ -8,6 +9,9 @@ import bagel.util.Point;
  * @param <map>
  */
 public class ShadowDefend <map> extends AbstractGame {
+    //
+    public static final int TOSECONDS = 1000;
+    public static final int FPS = 60;
     //Definitions for all the panel placements
     private final static int TIMESCALE_X = 260;
     private final static int STATUS_PANEL_Y = 752;
@@ -38,6 +42,7 @@ public class ShadowDefend <map> extends AbstractGame {
     public final static String SUPERTANK = "supertank";
     public final static String AIRPLANE = "airplane";
     public final static String FALSE = "false";
+    public final static String AWAITING = "Awaiting Start";
     //Objects and variables
     private final Image buyPanel;
     private final Image statusPanel;

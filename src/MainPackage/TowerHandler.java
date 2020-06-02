@@ -1,3 +1,4 @@
+package MainPackage;
 import EnemyPackage.AbstractEnemy;
 import PlayerPackage.*;
 import TowerPackage.*;
@@ -8,6 +9,7 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * Handles the towers for each level
@@ -18,8 +20,8 @@ public class TowerHandler {
     private Image tankImage = new Image("res/images/tank.png");
     private Image superTankImage = new Image("res/images/supertank.png");
     private Image airImage = new Image("res/images/airsupport.png");
-    private ArrayList<AbstractTank> tankList = new ArrayList();
-    private ArrayList<Airplane> airplaneList = new ArrayList();
+    private ArrayList<AbstractTank> tankList = new ArrayList<>();
+    private ArrayList<Airplane> airplaneList = new ArrayList<>();
 
     public TowerHandler(){
         placing = ShadowDefend.FALSE;
@@ -85,7 +87,8 @@ public class TowerHandler {
      * Locates the first enemy in the list and targets if it is within the radius
      * @param enemyList
      */
-    public void updateTowerList(ArrayList<AbstractEnemy> enemyList){
+    public void updateTankList(ArrayList<AbstractEnemy> enemyList){
+        //Updates the tanks
         for(AbstractTank t: tankList){
             if (t == null) {
                 break;
@@ -93,12 +96,25 @@ public class TowerHandler {
             //From these calculations should get a rectangle with tank in the centre
             Rectangle tankRange = new Rectangle(t.getPos().x - t.getRadius()/2, t.getPos().y - t.getRadius()/2,
                     t.getRadius(), t.getRadius());
-            //If the enemy intersects with a tank, will update and check it's range
+            //If the enemy intersects with a tank, will become new target if it can shoot
             for(AbstractEnemy e: enemyList) {
                 if(e.getBounds().intersects(tankRange)){
                     t.updateTank(e);
                     break;
                 }
+            }
+        }
+    }
+
+    public void updateAirplaneList(ArrayList<AbstractEnemy> enemyList, TiledMap map){
+        //Updates airplanes
+        ListIterator<Airplane> itr = airplaneList.listIterator();
+        while (itr.hasNext()) {
+            Airplane a = itr.next();
+            a.updateAirplane(enemyList);
+            Point position = a.getPos().asPoint();
+            if(a.getExplosiveList().isEmpty() && position.x > map.getWidth() && position.y > map.getHeight()) {
+                itr.remove();
             }
         }
     }

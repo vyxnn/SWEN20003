@@ -3,21 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPackage/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayerPackage/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerPackage/PlayerData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPackage/ShadowDefend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPackage/TowerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TowerPackage/AbstractTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerPackage/AbstractTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerPackage/SuperTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerPackage/SuperTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerPackage/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerPackage/Airplane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Level.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPackage/PlayerData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PlayerPackage/PlayerData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShadowDefend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShadowDefend.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TowerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TowerPackage/AbstractTank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerPackage/AbstractTank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TowerPackage/SuperTank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerPackage/SuperTank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TowerPackage/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerPackage/Tank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TowerPackage/Airplane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerPackage/Airplane.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="171" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -127,7 +131,7 @@
       <workItem from="1589260308402" duration="333000" />
       <workItem from="1589260691514" duration="119000" />
       <workItem from="1589370019822" duration="15630000" />
-      <workItem from="1589595426349" duration="90736000" />
+      <workItem from="1589595426349" duration="102486000" />
     </task>
     <servers />
   </component>
@@ -151,26 +155,26 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="82" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1590559231523" />
-    <state width="1237" height="157" key="GridCell.Tab.0.bottom" timestamp="1591079851889">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1167" height="157" key="GridCell.Tab.0.bottom" timestamp="1591101392211">
+      <screen x="0" y="0" width="1210" height="720" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.bottom/0.0.1210.720@0.0.1210.720" timestamp="1591077806777" />
-    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1591079851889" />
-    <state width="1237" height="157" key="GridCell.Tab.0.center" timestamp="1591079851889">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1167" height="157" key="GridCell.Tab.0.bottom/0.0.1210.720@0.0.1210.720" timestamp="1591101392211" />
+    <state width="1237" height="157" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1591101295707" />
+    <state width="1167" height="157" key="GridCell.Tab.0.center" timestamp="1591101392211">
+      <screen x="0" y="0" width="1210" height="720" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.center/0.0.1210.720@0.0.1210.720" timestamp="1591077806776" />
-    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1591079851889" />
-    <state width="1237" height="157" key="GridCell.Tab.0.left" timestamp="1591079851889">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1167" height="157" key="GridCell.Tab.0.center/0.0.1210.720@0.0.1210.720" timestamp="1591101392211" />
+    <state width="1237" height="157" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1591101295707" />
+    <state width="1167" height="157" key="GridCell.Tab.0.left" timestamp="1591101392211">
+      <screen x="0" y="0" width="1210" height="720" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.left/0.0.1210.720@0.0.1210.720" timestamp="1591077806776" />
-    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1591079851889" />
-    <state width="1237" height="157" key="GridCell.Tab.0.right" timestamp="1591079851889">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1167" height="157" key="GridCell.Tab.0.left/0.0.1210.720@0.0.1210.720" timestamp="1591101392211" />
+    <state width="1237" height="157" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1591101295707" />
+    <state width="1167" height="157" key="GridCell.Tab.0.right" timestamp="1591101392211">
+      <screen x="0" y="0" width="1210" height="720" />
     </state>
-    <state width="1167" height="157" key="GridCell.Tab.0.right/0.0.1210.720@0.0.1210.720" timestamp="1591077806776" />
-    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1591079851889" />
+    <state width="1167" height="157" key="GridCell.Tab.0.right/0.0.1210.720@0.0.1210.720" timestamp="1591101392211" />
+    <state width="1237" height="157" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1591101295707" />
     <state width="1167" height="218" key="GridCell.Tab.1.bottom" timestamp="1591068609235">
       <screen x="0" y="0" width="1210" height="720" />
     </state>
@@ -219,10 +223,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587808507190" />
-    <state x="297" y="-6" width="670" height="676" key="search.everywhere.popup" timestamp="1589445625688">
+    <state x="297" y="-6" width="672" height="676" key="search.everywhere.popup" timestamp="1591090735563">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="-6" width="670" height="676" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1589445625688" />
+    <state x="297" y="-6" width="672" height="676" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1591090735563" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -234,5 +238,8 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/dengv_project_2$ShadowDefend.ic" NAME="ShadowDefend Coverage Results" MODIFIED="1591098866202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

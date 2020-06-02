@@ -1,3 +1,5 @@
+package MainPackage;
+import EnemyPackage.AbstractEnemy;
 import EventPackage.*;
 import PlayerPackage.*;
 import bagel.Image;
@@ -5,7 +7,6 @@ import bagel.Input;
 import bagel.Window;
 import bagel.map.TiledMap;
 import bagel.util.Point;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -20,8 +21,6 @@ public class Level {
     private final static Image statusPanel = new Image("res/images/statuspanel.png");
     public final static double BUYHEIGHT = buyPanel.getHeight();
     public final static double STATUSHEIGHT = statusPanel.getHeight();
-    //private final double BUYWIDTH = buyPanel.getWidth();
-    //private final double STATUSWIDTH = statusPanel.getWidth();
     //Rewards for the wave
     private static final int BASEREWARD = 150;
     private static final int WAVEINCREMENT = 100;
@@ -31,6 +30,7 @@ public class Level {
     private List path;
     private ArrayList<Integer> eventIndexList = new ArrayList<>();
     private ArrayList<WaveEvent> waveEventList = new ArrayList<>();
+    private ArrayList<AbstractEnemy> activeEnemyList = new ArrayList<>();
     private TowerHandler towerHandler;
 
     /**
@@ -148,11 +148,16 @@ public class Level {
             if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {
                 waveEventList.get(eIndex).updateWaveEvent(path);
             }
-            //For each spawn event will check the list of enemies and target them
+            //For each will get all the active enemies and add them to the list
             if(waveEventList.get(eIndex).getEventType().equals("spawn")) {
-                towerHandler.updateTowerList(waveEventList.get(eIndex).getEnemyList());
+                activeEnemyList.addAll(waveEventList.get(eIndex).getEnemyList());
             }
         }
+        //Targets enemies according to the active enemy list
+        towerHandler.updateTankList(activeEnemyList);
+        towerHandler.updateAirplaneList(activeEnemyList, map);
+        //Empties list for further updates
+        activeEnemyList.removeAll(activeEnemyList);
 
         //Check if the last event is over, and adds new event if it is
         if(eventIndexList.size() >= 1) {
@@ -167,7 +172,7 @@ public class Level {
         //Checks if entire wave is over by checking that every wave event has ended
         int count = 0;
         for(Integer eIndex : eventIndexList){
-            if(!waveEventList.get(eIndex).getWaveProgress().equals("Awaiting Start")) {
+            if(!waveEventList.get(eIndex).getWaveProgress().equals(ShadowDefend.AWAITING)) {
                 break;
             }
             count++;
@@ -213,7 +218,7 @@ public class Level {
 
         //Default
         else {
-            return "Awaiting Start";
+            return ShadowDefend.AWAITING;
         }
     }
 

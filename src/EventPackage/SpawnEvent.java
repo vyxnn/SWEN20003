@@ -1,4 +1,5 @@
 package EventPackage;
+import MainPackage.*;
 import EnemyPackage.*;
 import PlayerPackage.PlayerData;
 import bagel.util.Point;
@@ -11,9 +12,6 @@ import java.util.ListIterator;
  * Spawns enemies at intervals
  */
 public class SpawnEvent extends WaveEvent {
-    private final static int TOSECONDS = 1000;
-    private final static int FPS = 60;
-
     private int spawnNumber, delayTime, time, spawned;
     private String enemyType;
     private ArrayList<AbstractEnemy> enemyList = new ArrayList<>();
@@ -57,7 +55,7 @@ public class SpawnEvent extends WaveEvent {
         }
 
         /* Checks if there's enemies to spawn*/
-        if(time >= ((delayTime/TOSECONDS)*FPS) && spawned < spawnNumber ){
+        if(time >= ((delayTime/ShadowDefend.TOSECONDS)*ShadowDefend.FPS) && spawned < spawnNumber ){
             addEnemy(PlayerData.getInstance().getTimescale(), path);
             spawned++;
             time = 0;

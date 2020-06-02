@@ -1,4 +1,5 @@
 package EventPackage;
+import MainPackage.*;
 import EnemyPackage.AbstractEnemy;
 import PlayerPackage.PlayerData;
 
@@ -9,9 +10,6 @@ import java.util.List;
  * Creates a delay event that makes the game do nothing for a set amount of time
  */
 public class DelayEvent extends WaveEvent {
-    // COULD ADD TO SHADOW DEFEND CLASS? NOT GOING TO CHANGE THOUGH
-    private final static int TOSECONDS = 1000;
-    private final static int FPS = 60;
     private int delayTime, time;
 
     /**
@@ -41,12 +39,12 @@ public class DelayEvent extends WaveEvent {
      */
     @Override
     public void updateWaveEvent( List path) {
-        if(time <= delayTime/TOSECONDS*FPS && time >= 0) {
+        if(time <= delayTime/ShadowDefend.TOSECONDS*ShadowDefend.FPS && time >= 0) {
             time+= PlayerData.getInstance().getTimescale();
             super.waveInProgress();
         }
 
-        if (time >= delayTime/TOSECONDS*FPS) {
+        if (time >= delayTime/ShadowDefend.TOSECONDS*ShadowDefend.FPS) {
             super.eventOver();
             super.waveOver();
         }
