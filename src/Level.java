@@ -142,7 +142,7 @@ public class Level {
      */
     public void updateLevel() {
         //Draws tower and updates time
-        towerHandler.updateTower();
+        towerHandler.drawTower();
         //Updates position for each active wave event
         for(Integer eIndex : eventIndexList) {
             if (waveEventList.get(eIndex).getWaveProgress().equals("Wave in Progress")) {

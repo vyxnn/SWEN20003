@@ -13,10 +13,10 @@ import static java.lang.Math.atan2;
 public abstract class AbstractTank {
     private static final int TOSECONDS = 1000;
     private static final int FPS = 60;
-    private int radius, cooldown, damage, time;
+    private int radius, cooldown, damage;
     private Point pPos;
     private Image tankImage , projImage;
-    private double angle;
+    private double angle,time;
     private DrawOptions option = new DrawOptions();
     private ArrayList<Projectile> projectileList= new ArrayList();
 
@@ -39,9 +39,8 @@ public abstract class AbstractTank {
     }
 
     public void updateTank(AbstractEnemy enemy){
-        updateTime();
         //Adds new projectile and resets time
-        if (time >= cooldown/TOSECONDS*FPS){
+        if (time >= cooldown*FPS/TOSECONDS){
             drawTank(enemy);
             projectileList.add(new Projectile(projImage, damage, pPos, enemy));
             time = 0;

@@ -10,7 +10,7 @@ import bagel.util.Rectangle;
 import java.util.ArrayList;
 
 /**
- * Handles the towers for each level 
+ * Handles the towers for each level
  */
 public class TowerHandler {
     private String placing;
@@ -71,7 +71,7 @@ public class TowerHandler {
     /**
      * Draws the tower and updates the time (cooldown) for each frame
      */
-    public void updateTower(){
+    public void drawTower(){
         for(AbstractTank t: tankList){
             if (t == null) {
                 break;
@@ -97,6 +97,7 @@ public class TowerHandler {
             for(AbstractEnemy e: enemyList) {
                 if(e.getBounds().intersects(tankRange)){
                     t.updateTank(e);
+                    break;
                 }
             }
         }
