@@ -5,11 +5,16 @@ import PlayerPackage.PlayerData;
 import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;
+import bagel.util.Rectangle;
 import bagel.util.Vector2;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import static java.lang.Math.atan2;
 
+/**
+ * AbstractTank class, has two subclasses Tank and SuperTank
+ * Mainly controls shooting and drawing tanks
+ */
 public abstract class AbstractTank {
     private int radius, cooldown, damage;
     private Point pPos;
@@ -18,10 +23,16 @@ public abstract class AbstractTank {
     private DrawOptions option = new DrawOptions();
     private ArrayList<Projectile> projectileList= new ArrayList();
 
+    /**
+     * Constructor for the tank
+     * Creates a tank at a certain point
+     * @param point where a tank is placed
+     */
     public AbstractTank(Point point) {
         pPos = point;
     }
 
+    //Used by child class to set its attributes
     protected void setAttributes(Image tankImage, Image projImage,  int radius, int cooldown, int damage){
         this.tankImage = tankImage;
         this.projImage = projImage;
@@ -32,10 +43,19 @@ public abstract class AbstractTank {
         angle = 0;
     }
 
+    /**
+     * Increments time for a tank
+     * Used in calculating cooldown
+     */
     public void updateTime(){
         time += PlayerData.getInstance().getTimescale();
     }
 
+    /**
+     * Updates a tank, checks its time to see it can shoot
+     * Also updates the projectile list
+     * @param enemy gets given an enemy to target
+     */
     public void updateTank(AbstractEnemy enemy){
         //Adds new projectile and resets time
         if (time >= cooldown*ShadowDefend.FPS/ShadowDefend.TOSECONDS){
@@ -48,19 +68,26 @@ public abstract class AbstractTank {
         ListIterator<Projectile> itr = projectileList.listIterator();
         while(itr.hasNext()) {
             Projectile p = itr.next();
-            if(p.getStatus().equals("dormant")) {
+            //If projectile is dormant, removes from lsit
+            if(p.getStatus().equals(ShadowDefend.DORMANT)) {
                 itr.remove();
             }
+            //Updates projectile
             p.updateProjectile();
         }
     }
 
-    //Draws tank with last angle value
+    /**
+     * Draws a tank with its previous angle
+     */
     public void drawTank(){
         tankImage.draw(pPos.x, pPos.y, option.setRotation(angle));
     }
 
-    //Draws tank if moving to face an enemy
+    /**
+     * Moves a tank to face its enemy and draws it
+     * @param enemy targeted by tank
+     */
     public void drawTank(AbstractEnemy enemy){
         //Vector calculations to face the enemy
         Point ePos = enemy.getPoint();
@@ -72,14 +99,32 @@ public abstract class AbstractTank {
         //Angle adjustment from my weird vector calculations
         angle += 3*Math.PI/2;
         //Draws the tank in the direction of the tank facing enemy
-        tankImage.draw(pPos.x, pPos.y, option.setRotation(angle));
+        drawTank();
     }
 
+    //GETTERS
+
+    /**
+     * Returns the radius
+     * @return radius
+     */
     public int getRadius(){
         return radius;
     }
 
+    /**
+     * Returns its position as a point
+     * @return position as Point
+     */
     public Point getPos(){
         return pPos;
+    }
+
+    /**
+     * Returns the bounds
+     * @return bounds as Rectangle
+     */
+    public Rectangle getBounds(){
+        return tankImage.getBoundingBoxAt(pPos);
     }
 }

@@ -50,6 +50,10 @@ public class DelayEvent extends WaveEvent {
         }
     }
 
+    /**
+     * Returns the enemy list for an event, in this case nothing
+     * @return null
+     */
     @Override
     public ArrayList<AbstractEnemy> getEnemyList() {
         return null;

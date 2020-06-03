@@ -12,9 +12,14 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 
+/**
+ * Airplane class
+ * Flies in a straight line (horizontal or vertical) across the map
+ * Drops explosives
+ */
 public class Airplane {
     private static final int SPEED = 5;
-    private static final int LAUNCH = 4;
+    private static final int LAUNCH = 4; //0-3 seconds inclusive
     private int time, cooldown, airNo;
     private String waiting;
     private static int count=0;
@@ -24,8 +29,12 @@ public class Airplane {
     private Image airplaneImage;
     private ArrayList<Explosive> explosiveList = new ArrayList();
 
+    /**
+     * Constructor for the airplane
+     * @param point Saves the point where it was placed
+     */
     public Airplane(Point point){
-        waiting = "YES";
+        waiting = ShadowDefend.TRUE;
         pPos = point;
         count++;
         airNo = count;
@@ -35,6 +44,7 @@ public class Airplane {
         spawnAirplane();
     }
 
+    //Spawns airplane just outside the map taking the coordinate from where it was placed
     private void spawnAirplane(){
         //Vertical if even, takes the y coordinate from where it was placed
         if(airNo%2 == 0) {
@@ -46,33 +56,40 @@ public class Airplane {
         }
     }
 
+    //Draws the airplane
     private void drawAirplane(){
+        //Rotates vertically
         if(airNo%2 == 0) {
             airplaneImage.draw(vPos.x, vPos.y, option.setRotation(Math.PI/2));
         }
+        //Rotates horizontally
         else {
             airplaneImage.draw(vPos.x, vPos.y, option.setRotation(Math.PI));
         }
     }
 
-
+    /**
+     * Updates the location of the airplane, and drops an explosive if the cooldown is over
+     * Also updates explosive
+     * @param enemyList checks if an enemy is near an explosive
+     */
     public void updateAirplane(ArrayList<AbstractEnemy> enemyList){
         //Updates time
         time += PlayerData.getInstance().getTimescale();
         updatePos();
         drawAirplane();
         //Check if there's an active cooldown, if not assigns a new one
-        if (waiting.equals("YES")) {
+        if (waiting.equals(ShadowDefend.TRUE)) {
             Random random = new Random();
             cooldown = random.nextInt(LAUNCH);
-            waiting = "NO";
+            waiting = ShadowDefend.FALSE;
         }
         //Adds explosive if cooldown is over, resets cooldown
-        if(time >= cooldown*ShadowDefend.FPS && waiting.equals("NO")) {
+        if(time >= cooldown*ShadowDefend.FPS && waiting.equals(ShadowDefend.FALSE)) {
             explosiveList.add(new Explosive(vPos.asPoint()));
             cooldown = 0;
             time = 0;
-            waiting = "YES";
+            waiting = ShadowDefend.TRUE;
         }
         //Iterates over explosive list and updates time or explodes
         ListIterator<Explosive> itr = explosiveList.listIterator();
@@ -82,6 +99,7 @@ public class Airplane {
         }
     }
 
+    //Updates the position of the airplane
     private void updatePos(){
         //Adds the unit vector in the direction of X
         if(airNo%2 == 0) {
@@ -97,10 +115,20 @@ public class Airplane {
         }
     }
 
+    //GETTERS
+
+    /**
+     * Returns the position of the airplane as a vector
+     * @return position as Vector2
+     */
     public Vector2 getPos(){
         return vPos;
     }
 
+    /**
+     * Returns the list of active explosives
+     * @return ArrayList of explosives
+     */
     public ArrayList<Explosive> getExplosiveList(){
         return explosiveList;
     }

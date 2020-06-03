@@ -5,7 +5,7 @@ import PlayerPackage.*;
 import bagel.util.Point;
 
 /**
- *
+ * Runs the game
  * @param <map>
  */
 public class ShadowDefend <map> extends AbstractGame {
@@ -27,13 +27,17 @@ public class ShadowDefend <map> extends AbstractGame {
     public final static String TANK = "tank";
     public final static String SUPERTANK = "supertank";
     public final static String AIRPLANE = "airplane";
-    public final static String FALSE = "false";
+    //Status string commands
+    public final static String FALSE = "False";
+    public final static String TRUE = "True";
     public final static String INPROGRESS = "Wave in Progress";
     public final static String AWAITING = "Awaiting Start";
     public final static String PLACING = "Placing";
     public final static String EVENTOVER = "Event Over";
     public final static String WINNER = "Winner!";
-
+    //Status commands for projectiles
+    public final static String DORMANT = "Dormant";
+    public final static String ACTIVE = "Active";
     //Definitions for all the panel placements
     private final static int TIMESCALE_X = 260;
     private final static int STATUS_PANEL_Y = 752;
@@ -49,13 +53,13 @@ public class ShadowDefend <map> extends AbstractGame {
     private final static int TOWER_Y = 90;
     private final static int TOWER_X = 32;
     //Objects and variables
+    private int lastLevel = 2; //Can be modified if we want more levels
     private final Image buyPanel;
     private final Image statusPanel;
     private final Image tankImage, superTankImage, airImage;
     private final Font statusFont, moneyFont, keyBindFont, towerFont;
     private DrawOptions option = new DrawOptions();
     private Level level;
-    private int lastLevel = 2;
 
     /**
      * Entry point for Bagel game
@@ -117,7 +121,7 @@ public class ShadowDefend <map> extends AbstractGame {
             level.startWave();
         }
 
-
+        //Displays winner if end of levels
         if(level.checkLevelProgress() && level.getLevelNum() == lastLevel){
             level.Winner();
         }
@@ -131,6 +135,7 @@ public class ShadowDefend <map> extends AbstractGame {
         if(input.wasPressed(Keys.K)) {
             PlayerData.getInstance().decreaseTimescale();
         }
+
         //If left mouse button was pressed, and there is a tower being placed, will place the item
         if (input.wasPressed(MouseButtons.LEFT) && !level.getTowerProgress().equals(FALSE)) {
            if(checkMousePos(input)) {
@@ -149,7 +154,7 @@ public class ShadowDefend <map> extends AbstractGame {
         }
 
         //Ending the window if esc is pressed, or all lives are lost
-        if (input.isDown(Keys.ESCAPE) || PlayerData.getInstance().getLife() < 0) {
+        if (input.isDown(Keys.ESCAPE) || PlayerData.getInstance().getLife() <= 0) {
             Window.close();
         }
 

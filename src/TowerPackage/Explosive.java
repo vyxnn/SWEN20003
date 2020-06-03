@@ -9,12 +9,21 @@ import bagel.util.Rectangle;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+/**
+ * Explosive class
+ * Will detonate after a set amount of time, AOE damage to surrounding enemies
+ */
 public class Explosive {
     private final int radius = 150, cooldown = 2000, damage = 500;
     private int time;
     private Image projectileImage;
     private Point pPos;
 
+    /**
+     * Constructor for an explosive
+     * Starts timer
+     * @param point where the explosive is dropped
+     */
     public Explosive(Point point){
         pPos = point;
         time = 0;

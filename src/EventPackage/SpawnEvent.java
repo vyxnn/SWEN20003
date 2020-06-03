@@ -37,7 +37,7 @@ public class SpawnEvent extends WaveEvent {
     @Override
     public void startWaveEvent(List path) {
         time = 0;
-        addEnemy(PlayerData.getInstance().getTimescale(), path);
+        addEnemy(path);
         spawned = 1;
         super.waveInProgress();
     }
@@ -55,8 +55,8 @@ public class SpawnEvent extends WaveEvent {
         }
 
         /* Checks if there's enemies to spawn*/
-        if(time >= ((delayTime/ShadowDefend.TOSECONDS)*ShadowDefend.FPS) && spawned < spawnNumber ){
-            addEnemy(PlayerData.getInstance().getTimescale(), path);
+        if(time >= (delayTime*ShadowDefend.FPS/ShadowDefend.TOSECONDS) && spawned < spawnNumber ){
+            addEnemy(path);
             spawned++;
             time = 0;
         }
@@ -85,14 +85,7 @@ public class SpawnEvent extends WaveEvent {
         updateProgress();
     }
 
-    /**
-     * Gets and returns the current list of enemies
-     * @return
-     */
-    public ArrayList<AbstractEnemy> getEnemyList(){
-        return enemyList;
-    }
-
+    //Checks the progress of a wave event
     private void updateProgress(){
         /*Ends wave if all enemies are dead or left the map*/
         if(enemyList.isEmpty() && spawned == spawnNumber) {
@@ -109,25 +102,21 @@ public class SpawnEvent extends WaveEvent {
     }
 
     /*Choosing a spawn type for the event*/
-    private void addEnemy(int timescale, List path){
+    private void addEnemy(List path){
         if(enemyType.equals("slicer")) {
-            enemyList.add(new Slicer((Point) path.get(0), timescale, 0));
+            enemyList.add(new Slicer((Point) path.get(0), 0));
         }
 
         else if (enemyType.equals("superslicer")) {
-            enemyList.add(new SuperSlicer((Point) path.get(0), timescale,0));
+            enemyList.add(new SuperSlicer((Point) path.get(0),0));
         }
 
         else if(enemyType.equals("megaslicer")) {
-            enemyList.add(new MegaSlicer((Point) path.get(0), timescale,0));
+            enemyList.add(new MegaSlicer((Point) path.get(0),0));
         }
 
         else if(enemyType.equals("apexslicer")) {
-            enemyList.add(new ApexSlicer((Point) path.get(0), timescale,0));
-        }
-        //Throws error?
-        else {
-            System.out.println("Invalid Enemy Type");
+            enemyList.add(new ApexSlicer((Point) path.get(0),0));
         }
     }
 
@@ -137,9 +126,17 @@ public class SpawnEvent extends WaveEvent {
             if (e == null) {
                 break;
             }
-            e.changeSpeed(PlayerData.getInstance().getTimescale());
+            e.changeSpeed();
         }
     }
 
+    //GETTERS
+    /**
+     * Gets and returns the current list of enemies
+     * @return ArrayList of enemies
+     */
+    public ArrayList<AbstractEnemy> getEnemyList(){
+        return enemyList;
+    }
 
 }

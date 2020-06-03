@@ -1,7 +1,6 @@
 package EventPackage;
 import EnemyPackage.AbstractEnemy;
 import MainPackage.ShadowDefend;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,10 @@ public abstract class WaveEvent {
         return waveProgress;
     }
 
+    /**
+     * Returns the event type
+     * @return event type as String
+     */
     public String getEventType(){
         return eventType;
     }
@@ -44,18 +47,6 @@ public abstract class WaveEvent {
      */
     public String getEventProgress(){
         return eventProgress;
-    }
-
-    protected void waveInProgress(){
-        waveProgress = ShadowDefend.INPROGRESS;
-    }
-
-    protected void waveOver(){
-        waveProgress = ShadowDefend.AWAITING;
-    }
-
-    protected void eventOver(){
-        eventProgress = ShadowDefend.EVENTOVER;
     }
 
     /**
@@ -79,5 +70,23 @@ public abstract class WaveEvent {
      */
     public abstract void updateWaveEvent(List path);
 
+    /**
+     * Returns the list of enemies in an event
+     * @return List of AbstractEnemy
+     */
     public abstract ArrayList<AbstractEnemy> getEnemyList();
+
+    //SETTERS
+    //Used by child classes
+    protected void waveInProgress(){
+        waveProgress = ShadowDefend.INPROGRESS;
+    }
+
+    protected void waveOver(){
+        waveProgress = ShadowDefend.AWAITING;
+    }
+
+    protected void eventOver(){
+        eventProgress = ShadowDefend.EVENTOVER;
+    }
 }
