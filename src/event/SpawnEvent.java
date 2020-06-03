@@ -70,7 +70,7 @@ public class SpawnEvent extends WaveEvent {
                 e.enemyDeath(itr);
             }
             //Updates and draws if slicer is still on path
-            if(e.getIndex() + 1 < path.size()) {
+            else if(e.getIndex() + 1 < path.size()) {
                 e.updatePos((Point) path.get(e.getIndex() + 1));
                 e.drawImage();
             }
