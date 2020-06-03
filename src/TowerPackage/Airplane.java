@@ -21,7 +21,7 @@ public class Airplane {
     private static final int SPEED = 5;
     private static final int LAUNCH = 4; //0-3 seconds inclusive
     private int time, cooldown, airNo;
-    private String waiting;
+    private String waiting, status;
     private static int count=0;
     private Vector2 vPos;
     private Point pPos;
@@ -34,6 +34,7 @@ public class Airplane {
      * @param point Saves the point where it was placed
      */
     public Airplane(Point point){
+        status = ShadowDefend.ACTIVE;
         waiting = ShadowDefend.TRUE;
         pPos = point;
         count++;
@@ -85,7 +86,8 @@ public class Airplane {
             waiting = ShadowDefend.FALSE;
         }
         //Adds explosive if cooldown is over, resets cooldown
-        if(time >= cooldown*ShadowDefend.FPS && waiting.equals(ShadowDefend.FALSE)) {
+        if(time >= cooldown*ShadowDefend.FPS && waiting.equals(ShadowDefend.FALSE)
+                && status.equals(ShadowDefend.ACTIVE)) {
             explosiveList.add(new Explosive(vPos.asPoint()));
             cooldown = 0;
             time = 0;
@@ -131,5 +133,12 @@ public class Airplane {
      */
     public ArrayList<Explosive> getExplosiveList(){
         return explosiveList;
+    }
+
+    /**
+     * Stops airplane from dropping bombs
+     */
+    public void removeAirplane(){
+        status = ShadowDefend.DORMANT;
     }
 }

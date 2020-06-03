@@ -123,8 +123,12 @@ public class TowerHandler {
         while (itr.hasNext()) {
             //Iterates over each airplane and updates it
             Airplane a = itr.next();
-            a.updateAirplane(enemyList);
             Point position = a.getPos().asPoint();
+            a.updateAirplane(enemyList);
+            //If airplane is off map, stops dropping explosives
+            if(position.x > map.getWidth() && position.y > map.getHeight()){
+                a.removeAirplane();
+            }
             //Once all the explosives have detonated and the airplane is off the map, will remove
             if(a.getExplosiveList().isEmpty() && position.x > map.getWidth() && position.y > map.getHeight()) {
                 itr.remove();
