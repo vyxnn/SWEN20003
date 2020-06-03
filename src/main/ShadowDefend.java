@@ -1,7 +1,7 @@
-package MainPackage;
+package main;
 import bagel.*;
 import bagel.util.Colour;
-import PlayerPackage.*;
+import player.*;
 import bagel.util.Point;
 
 /**

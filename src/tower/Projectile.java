@@ -1,8 +1,8 @@
-package TowerPackage;
+package tower;
 
-import EnemyPackage.AbstractEnemy;
-import MainPackage.ShadowDefend;
-import PlayerPackage.PlayerData;
+import enemy.AbstractEnemy;
+import main.ShadowDefend;
+import player.PlayerData;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Vector2;

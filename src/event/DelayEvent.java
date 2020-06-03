@@ -1,7 +1,7 @@
-package EventPackage;
-import MainPackage.*;
-import EnemyPackage.AbstractEnemy;
-import PlayerPackage.PlayerData;
+package event;
+import main.*;
+import enemy.AbstractEnemy;
+import player.PlayerData;
 
 import java.util.ArrayList;
 import java.util.List;

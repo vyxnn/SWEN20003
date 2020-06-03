@@ -1,7 +1,7 @@
-package TowerPackage;
-import MainPackage.*;
-import EnemyPackage.*;
-import PlayerPackage.PlayerData;
+package tower;
+import main.*;
+import enemy.*;
+import player.PlayerData;
 import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;

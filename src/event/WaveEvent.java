@@ -1,6 +1,6 @@
-package EventPackage;
-import EnemyPackage.AbstractEnemy;
-import MainPackage.ShadowDefend;
+package event;
+import enemy.AbstractEnemy;
+import main.ShadowDefend;
 import java.util.ArrayList;
 import java.util.List;
 

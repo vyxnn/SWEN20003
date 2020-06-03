@@ -1,4 +1,4 @@
-package PlayerPackage;
+package player;
 
 /**
  * PlayerData that contains all the static data of the game

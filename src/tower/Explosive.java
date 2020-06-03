@@ -1,7 +1,7 @@
-package TowerPackage;
-import EnemyPackage.*;
-import MainPackage.*;
-import PlayerPackage.PlayerData;
+package tower;
+import enemy.*;
+import main.*;
+import player.PlayerData;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;

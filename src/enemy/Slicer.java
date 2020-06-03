@@ -1,5 +1,5 @@
-package EnemyPackage;
-import PlayerPackage.*;
+package enemy;
+import player.*;
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;

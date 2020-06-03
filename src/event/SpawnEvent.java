@@ -1,7 +1,7 @@
-package EventPackage;
-import MainPackage.*;
-import EnemyPackage.*;
-import PlayerPackage.PlayerData;
+package event;
+import main.*;
+import enemy.*;
+import player.PlayerData;
 import bagel.util.Point;
 import java.util.ArrayList;
 import java.util.List;

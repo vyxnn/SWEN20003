@@ -1,7 +1,7 @@
-package MainPackage;
-import EnemyPackage.*;
-import PlayerPackage.*;
-import TowerPackage.*;
+package main;
+import enemy.*;
+import player.*;
+import tower.*;
 import bagel.Image;
 import bagel.Input;
 import bagel.map.TiledMap;
@@ -16,6 +16,7 @@ import java.util.ListIterator;
 public class TowerHandler {
     private String placing;
     private final static String BLOCKED = "blocked";
+    //Can't get this from the class as it hasn't been created yet
     private Image tankImage = new Image("res/images/tank.png");
     private Image superTankImage = new Image("res/images/supertank.png");
     private Image airImage = new Image("res/images/airsupport.png");

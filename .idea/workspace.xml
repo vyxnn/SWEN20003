@@ -3,11 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainPackage/TowerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPackage/TowerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TowerPackage/Airplane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MainPackage/TowerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainPackage/TowerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PlayerPackage/PlayerData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PlayerPackage/PlayerData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TowerPackage/Airplane.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TowerPackage/Airplane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnemyPackage/AbstractEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enemy/AbstractEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnemyPackage/ApexSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enemy/ApexSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnemyPackage/MegaSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enemy/MegaSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnemyPackage/Slicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enemy/Slicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnemyPackage/SuperSlicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enemy/SuperSlicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventPackage/DelayEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/DelayEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventPackage/SpawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/SpawnEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventPackage/WaveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/WaveEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainPackage/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainPackage/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ShadowDefend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainPackage/TowerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/TowerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayerPackage/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/PlayerData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/AbstractTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/AbstractTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Explosive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/Explosive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/Projectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/SuperTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/SuperTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TowerPackage/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/Tank.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,22 +95,9 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.ShadowDefend (1)">
-    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Game" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Game" />
       <module name="bagel-starter-pack" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ShadowDefend (1)" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainPackage.ShadowDefend" />
-      <module name="bagel-starter-pack" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MainPackage.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -109,11 +109,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Game" />
-      </list>
-    </recent_temporary>
+    <configuration name="ShadowDefend" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.ShadowDefend" />
+      <module name="bagel-starter-pack" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -141,7 +149,7 @@
       <workItem from="1589260308402" duration="333000" />
       <workItem from="1589260691514" duration="119000" />
       <workItem from="1589370019822" duration="15630000" />
-      <workItem from="1589595426349" duration="124103000" />
+      <workItem from="1589595426349" duration="124950000" />
     </task>
     <servers />
   </component>

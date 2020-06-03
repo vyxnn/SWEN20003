@@ -2,8 +2,8 @@
  *Currently the majority of slicer operations seem generic enough to be included in an Enemy Class
  *If my assumptions are wrong and there is only one enemy for the whole game, then can easily move everything to Slicer
  */
-package EnemyPackage;
-import PlayerPackage.*;
+package enemy;
+import player.*;
 import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Point;

@@ -1,4 +1,4 @@
-package TowerPackage;
+package tower;
 
 import bagel.Image;
 import bagel.util.Point;

@@ -1,7 +1,7 @@
-package MainPackage;
-import EnemyPackage.AbstractEnemy;
-import EventPackage.*;
-import PlayerPackage.*;
+package main;
+import enemy.AbstractEnemy;
+import event.*;
+import player.*;
 import bagel.*;
 import bagel.map.TiledMap;
 import bagel.util.Point;
