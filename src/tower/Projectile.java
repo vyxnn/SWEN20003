@@ -46,8 +46,7 @@ public class Projectile {
             return;
         }
         //Otherwise updates to target enemy
-        Point enemyPos = enemy.getPoint();
-        Vector2 vTow = new Vector2(enemyPos.x, enemyPos.y);
+        Vector2 vTow = enemy.getVPos();
         vTow = vTow.sub(vPos);
         vTow = vTow.normalised();
         //Multiplies by speed then timescale
@@ -55,9 +54,10 @@ public class Projectile {
         vPos = vPos.add(vTow);
         drawProjectile();
 
-        //Checks if the projectile is within the bounds of the enemy
+        //Checks if the projectile point is within the bounds of the enemy
+        //Modified to check if point is within bounds rather than both the bounding boxes for realism
         //Hits enemy and sets projectile to "dormant"
-        if(image.getBoundingBoxAt(vPos.asPoint()).intersects(enemy.getBounds())){
+        if(enemy.getBounds().intersects(vPos.asPoint())) {
             enemy.hit(damage);
             status = ShadowDefend.DORMANT;
         }

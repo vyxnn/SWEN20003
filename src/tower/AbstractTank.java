@@ -49,6 +49,7 @@ public abstract class AbstractTank {
      */
     public void updateTime(){
         time += PlayerData.getInstance().getTimescale();
+
     }
 
     /**
@@ -63,17 +64,16 @@ public abstract class AbstractTank {
             projectileList.add(new Projectile(projImage, damage, pPos, enemy));
             time = 0;
         }
-
         //Iterates over projectile list and updates pos or removes if the enemy is dead
         ListIterator<Projectile> itr = projectileList.listIterator();
         while(itr.hasNext()) {
             Projectile p = itr.next();
-            //If projectile is dormant, removes from lsit
+            //Updates projectile
+            p.updateProjectile();
+            //If projectile is dormant, removes from list
             if(p.getStatus().equals(ShadowDefend.DORMANT)) {
                 itr.remove();
             }
-            //Updates projectile
-            p.updateProjectile();
         }
     }
 

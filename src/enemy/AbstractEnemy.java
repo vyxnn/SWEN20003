@@ -61,6 +61,10 @@ public abstract class AbstractEnemy {
         return health;
     }
 
+    public Vector2 getVPos(){
+        return vPos;
+    }
+
     /**
      * Sets the attributes of an enemy from a child class
      * @param defaultSpeed default speed of a slicer
