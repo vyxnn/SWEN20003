@@ -12,6 +12,10 @@ import java.util.ListIterator;
  * Spawns enemies at intervals
  */
 public class SpawnEvent extends WaveEvent {
+    private static final String SLICER = "slicer";
+    private static final String SUPERSLICER = "superslicer";
+    private static final String MEGASLICER = "megaslicer";
+    private static final String APEXSLICER = "apexslicer";
     private int spawnNumber, delayTime, time, spawned;
     private String enemyType;
     private ArrayList<AbstractEnemy> enemyList = new ArrayList<>();
@@ -103,19 +107,19 @@ public class SpawnEvent extends WaveEvent {
 
     /*Choosing a spawn type for the event*/
     private void addEnemy(List path){
-        if(enemyType.equals("slicer")) {
+        if(enemyType.equals(SLICER)) {
             enemyList.add(new Slicer((Point) path.get(0), 0));
         }
 
-        else if (enemyType.equals("superslicer")) {
+        else if (enemyType.equals(SUPERSLICER)) {
             enemyList.add(new SuperSlicer((Point) path.get(0),0));
         }
 
-        else if(enemyType.equals("megaslicer")) {
+        else if(enemyType.equals(MEGASLICER)) {
             enemyList.add(new MegaSlicer((Point) path.get(0),0));
         }
 
-        else if(enemyType.equals("apexslicer")) {
+        else if(enemyType.equals(APEXSLICER)) {
             enemyList.add(new ApexSlicer((Point) path.get(0),0));
         }
     }

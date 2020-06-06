@@ -21,7 +21,7 @@ public abstract class AbstractTank {
     private Image tankImage , projImage;
     private double angle,time;
     private DrawOptions option = new DrawOptions();
-    private ArrayList<Projectile> projectileList= new ArrayList();
+    private ArrayList<Projectile> projectileList= new ArrayList<>();
 
     /**
      * Constructor for the tank
