@@ -99,9 +99,9 @@ public class ShadowDefend <map> extends AbstractGame {
     protected void update(Input input) {
         //Drawing maps and panels
         level.drawMap();
-        drawStatusPanel();
         drawBuyPanel();
         level.updateLevel();
+        drawStatusPanel();
 
         //Checks if there is an item being placed, and renders it where the mouse is
         if (!level.getTowerProgress().equals(false)) {
