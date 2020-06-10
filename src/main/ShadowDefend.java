@@ -39,6 +39,8 @@ public class ShadowDefend <map> extends AbstractGame {
     public final static String DORMANT = "Dormant";
     public final static String ACTIVE = "Active";
     //Definitions for all the panel placements
+    private final static int MONEY_OFFSET_X = 200;
+    private final static int MONEY_OFFSET_Y = 65;
     private final static int TIMESCALE_X = 260;
     private final static int STATUS_PANEL_Y = 752;
     private final static int WAVE_X = 10;
@@ -184,7 +186,8 @@ public class ShadowDefend <map> extends AbstractGame {
     private void drawBuyPanel() {
         buyPanel.drawFromTopLeft(0,0);
         //Drawing money
-        moneyFont.drawString("$" + PlayerData.getInstance().getMoney(),level.getMap().getWidth()-200,65);
+        moneyFont.drawString("$" + PlayerData.getInstance().getMoney(),
+                level.getMap().getWidth()-MONEY_OFFSET_X,MONEY_OFFSET_Y);
         keyBindFont.drawString("Key binds:", KEY_BIND_X, KEY_BIND_Y);
         keyBindFont.drawString("S - Start Wave:", KEY_BIND_X, S_BIND_Y);
         keyBindFont.drawString("L - Increase Timescale:", KEY_BIND_X, L_BIND_Y);
