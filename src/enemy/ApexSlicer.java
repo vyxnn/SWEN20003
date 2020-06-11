@@ -13,8 +13,11 @@ import java.util.ListIterator;
 public class ApexSlicer extends AbstractEnemy{
     private static final int DEATHSPAWN = 4;
     private Image apexSlicerImage;
-    private double defaultSpeed = 0.75;
-    private int health = 25, reward = 150, penalty = 16;
+    /**
+     * Public attributes to pass through different slicer classes
+     */
+    public static double defaultSpeed = 0.5*MegaSlicer.defaultSpeed;
+    private int health = 25*Slicer.health, reward = 150, penalty = DEATHSPAWN*MegaSlicer.penalty;
 
     /**
      * Constructor for an ApexSlicer

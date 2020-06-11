@@ -12,8 +12,11 @@ import java.util.ListIterator;
  */
 public class Slicer extends AbstractEnemy {
     private Image slicerImage;
-    private double defaultSpeed = 2;
-    private int health = 1, reward = 2, penalty = 1;
+    /**
+     * Public attributes to pass through different slicer classes
+     */
+    public static double defaultSpeed = 2;
+    public static int health = 1, reward = 2, penalty = 1;
 
     /**
      * Constructor for a Slicer

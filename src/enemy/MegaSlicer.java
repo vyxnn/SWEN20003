@@ -12,8 +12,11 @@ import java.util.ListIterator;
 public class MegaSlicer extends AbstractEnemy {
     private static final int DEATHSPAWN = 2;
     private Image megaSlicerImage;
-    private double defaultSpeed = 1.5;
-    private int health = 2, reward = 10, penalty = 4;
+    /**
+     * Public attributes to pass through different slicer classes
+     */
+    public static double defaultSpeed = SuperSlicer.defaultSpeed;
+    public static int health = 2*SuperSlicer.health, reward = 10, penalty = DEATHSPAWN*SuperSlicer.penalty;
 
     /**
      * Constructor for a MegaSlicer
