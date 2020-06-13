@@ -3,6 +3,7 @@ import bagel.*;
 import bagel.util.Colour;
 import player.*;
 import bagel.util.Point;
+import tower.Airplane;
 
 /**
  * Runs the game
@@ -101,8 +102,8 @@ public class ShadowDefend <map> extends AbstractGame {
     protected void update(Input input) {
         //Drawing maps and panels
         level.drawMap();
-        drawBuyPanel();
         level.updateLevel();
+        drawBuyPanel();
         drawStatusPanel();
 
         //Checks if there is an item being placed, and renders it where the mouse is
@@ -116,6 +117,7 @@ public class ShadowDefend <map> extends AbstractGame {
         if(level.checkLevelProgress() && level.getLevelNum()!= lastLevel){
             level = new Level(level.getLevelNum() + 1);
             PlayerData.getInstance().resetData();
+            Airplane.resetCount();
         }
 
         //Starts a wave if one is not in progress

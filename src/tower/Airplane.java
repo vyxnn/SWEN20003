@@ -141,4 +141,13 @@ public class Airplane {
     public void removeAirplane(){
         status = ShadowDefend.DORMANT;
     }
+
+    /**
+     * Resets airplane count
+     * Needs to be static as players can go through an entire level without purchasing a single airplane,
+     * so potentially can never have an instance of airplane
+     */
+    public static void resetCount(){
+        count = 0;
+    }
 }
