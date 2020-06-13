@@ -86,7 +86,7 @@ public class ShadowDefend <map> extends AbstractGame {
         moneyFont = new Font("res/fonts/DejaVuSans-Bold.ttf", 48);
         keyBindFont = new Font("res/fonts/DejaVuSans-Bold.ttf", 14);
         towerFont = new Font("res/fonts/DejaVuSans-Bold.ttf", 20);
-        //UNSURE IF I NEED TO DRAW THEM FROM HERE OR MIGHT BE ABLE TO DRAW FROM CALLING THE CLASS
+        //Unfortunately can't be drawn from class without instantiating or making it static
         tankImage = new Image("res/images/tank.png");
         superTankImage = new Image("res/images/supertank.png");
         airImage = new Image("res/images/airsupport.png");

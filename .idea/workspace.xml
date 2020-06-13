@@ -4,7 +4,6 @@
     <list default="true" id="0f64553b-968d-4da4-9ea4-f71b81ad7e4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ShadowDefend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tower/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tower/Airplane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +151,7 @@
       <workItem from="1589260691514" duration="119000" />
       <workItem from="1589370019822" duration="15630000" />
       <workItem from="1589595426349" duration="144511000" />
-      <workItem from="1592018682850" duration="797000" />
+      <workItem from="1592018682850" duration="1571000" />
     </task>
     <servers />
   </component>
