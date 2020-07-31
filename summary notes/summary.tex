@@ -1,0 +1,188 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\section{Basic Commands}
+\textcolor{blue}{\textbf{identifier:}} a name that uniquely identifies a program element such as a class, object, variable or method\\
+\textcolor{blue}{\textbf{data types:}} two main data types, primitive and non primitive \\
+\textcolor{blue}{\textbf{primitive:}} intrinsic data type, eg. \texttt{int, float, char, bool} \\
+\textcolor{blue}{\textbf{non-primitive}} derived data type, eg. \texttt{class, array, interface, object, string}\\
+\textcolor{blue}{\textbf{two-way statement:}}  combines a requirement with two options \\
+\indent eg. \texttt{flag = (i<10) ? 0:1; },  if \texttt{i=5} then \texttt{flag = 0}\\
+\textcolor{blue}{\texttt{import:}} adds library, similar to \texttt{\#include} in c \\
+\textcolor{blue}{\texttt{final:}} declares a constant, can be declared then assigned later, similar to \#define \\
+\textcolor{blue}{\textbf{polymorphism:}} being able to use objects or methods in different ways \\ 
+\textcolor{blue}{\textbf{overloading:}} same method with various forms depending on signature \\ 
+\textcolor{blue}{\textbf{overriding:}} same method with various forms depending on class \\ 
+\textcolor{blue}{\textbf{substitution:}} using subclasses in place of superclasses \\ 
+\textcolor{blue}{\textbf{generics:}} defining parametrised methods/classes \\ 
+
+\section{Classes}
+\textcolor{ForestGreen}{\textbf{class:}} a fundamental unit of abstraction in OOP, represents an entity that is part of a problem \\ 
+\textcolor{ForestGreen}{\textbf{object:}} a specific, concrete example of a class \\ 
+\textcolor{ForestGreen}{\textbf{instance:}} an object that exists in your code \\
+\textcolor{ForestGreen}{\textbf{data abstraction:}} creating new data types that are well suited to an application by defining a new class \\ 
+\textcolor{ForestGreen}{\textbf{encapsulation:}} grouping data(attributes) and methods that manipulate the data to a single entity through defining a class \\
+\textcolor{ForestGreen}{\textbf{instantiate:}} to create an object of a class, use keyword \textcolor{ForestGreen}{\texttt{new}} \\  
+\textcolor{ForestGreen}{\textbf{constructor:}} a method used to create and initialise an object \\  
+\textcolor{ForestGreen}{\texttt{this:}} a reference to the calling object, ie. the object/class that owns the method \\   
+\textcolor{ForestGreen}{\textbf{method overloading:}} methods that have the same name, but are distinguished by their signature \\   
+\textcolor{ForestGreen}{\textbf{polymorphism:}} processing objects differently depending on their data type or class \\ 
+  
+\noindent \textcolor{ForestGreen}{\textbf{static members:}} methods and attributes that are not specific to any object of the class \\  
+\textcolor{ForestGreen}{\textbf{static variable:}} a variable shared amongst all objects of the class, eg. if count is in circles, then every circle can access it \\
+\textcolor{ForestGreen}{\textbf{static method:}} a method that doesn't modify or access any instance variables of a class, can only call other static methods, and access static data only (no class data) \emph{be careful when using static methods} \\
+\textcolor{ForestGreen}{\textbf{instance variable:}} only one copy per object, eg. \texttt{circle.radius} will be different for each instance \\ 
+\textcolor{ForestGreen}{\textbf{copy constructor:}} a constructor that takes the input of an object, and creates a new instance of it with the same values. Different to assigning it to an object, as it will have a new reference. \\
+\textcolor{ForestGreen}{\texttt{equals:}} compares if two objects are equal, (\texttt{==} compares if two references are equal) \\
+\textcolor{ForestGreen}{\textbf{package:}} allows to group classes and interfaces into bundles, similar to libraries \\
+To place a class in a package, \textcolor{ForestGreen}{\texttt{package}} \textcolor{blue}{\texttt{<directory\_name>}} + class code \\
+
+\noindent \textcolor{ForestGreen}{\textbf{information hiding:}} the ability to 'hide' the details of a class from the outside world \\
+\textcolor{ForestGreen}{\texttt{public:}} makes it available/visible everywhere (within the class, and outside the class)\\
+\textcolor{ForestGreen}{\texttt{private:}} makes it only visible to within the class, (cannot be inherited, or visible by subclasses)\\
+\textcolor{ForestGreen}{\texttt{protected:}} makes it visible within the class, subclasses and within all classes that are in the same package as that class \\
+\textcolor{ForestGreen}{\textbf{access control:}} preventing an outside class from manipulating the properties of another class in undesired ways \\
+\textcolor{ForestGreen}{\textbf{mutable:}} a class that contains a method that can change the instance variable is called mutable \\
+\textcolor{ForestGreen}{\textbf{immutable:}} a class that contains no methods (aside from constructors) that can change any of the instance variables \\
+\textcolor{ForestGreen}{\textbf{primitives:}} a unit of information that only contains data and has no methods \\
+\textcolor{ForestGreen}{\textbf{wrapper classes:}} a class that gives extra functionality to primitive data types, and lets them behave like objects \\
+\textcolor{ForestGreen}{\textbf{parsing:}} processing one data type into another \\
+\textcolor{ForestGreen}{\textbf{unboxing:}} the process of converting a primitive to/from its equivalent wrapper class\\
+
+\section{Input and Output}
+\textcolor{orange}{\textbf{command line argument:}} information or data provided to a program when it is executed, accessible through the \textcolor{orange}{\texttt{args}} variable \\
+\textcolor{orange}{\textbf{scanner:}} importing the scanner \texttt{import java.util.Scanner;} \\
+create \emph{one} scanner for each program \texttt{Scanner scanner = new Scanner(System.in);}  \\
+\textcolor{orange}{\texttt{System.in:}} an object representing the standard input stream, or the terminal/keyboard \\
+\textcolor{orange}{\texttt{catch:}} acts as a safeguard for potential errors, prints an error message if anything is wrong \\
+
+\section{Inheritance and Polymorphism}
+\textcolor{Maroon}{\textbf{inheritance:}}  a form of abstraction that permits 'generalisation' of similar attributes and methods of classes, analogous to passing genetics on to your children, \emph{allows for code to be reused}\\
+\textcolor{Maroon}{\textbf{superclass:}} the 'parent' or 'base' class in the inheritance relationship; provides general information to its 'child' classes \\
+\textcolor{Maroon}{\textbf{subclass:}} the 'child' or 'derived' class in the inheritance relationship; inherits common attributes and methods from the 'parent' class \\
+\textcolor{Maroon}{\texttt{extends:}} indicates one class inherits from another \\
+\textcolor{Maroon}{\texttt{super():}} invokes a constructor in the parent class, used like a method \\
+\textcolor{Maroon}{\texttt{@override:}} when the child class method overrides the method in the parent class, the annotation is optional \\
+\textcolor{Maroon}{\textbf{overriding:}} declaring a method that exists in a superclass again in a subclass, with the same signature. Methods can only be overriden by subclasses\\
+\textcolor{Maroon}{\textbf{overloading:}} declaring multiple methods with the same name, but differing method signatures. Superclass methods can also be overloaded in subclasses \\
+\textcolor{Maroon}{\texttt{super.CLASS:}} also a reference to an object's parent class, similar to \texttt{this}, but referring to the attributes and methods of the parent \\
+\textcolor{Maroon}{\texttt{final:}} Indicates that an attribute, method or class can only be assigned, declared or defined once. Used if you don't want subclasses to override a method. \\
+\textcolor{Maroon}{\texttt{public:}} makes it available everywhere\\
+\textcolor{Maroon}{\texttt{protected:}} makes it visible only within the class, subclasses and within all the classes in the same package. Good for methods if accessed by child classes, but generally \emph{don't} assign to attributes.  \\
+\textcolor{Maroon}{\textbf{shadowing:}} when two or more variables are declared with the same name in overlapping scopes, ef. a subclass and a superclass. In general, just best to avoid.  \\
+\textcolor{Maroon}{\texttt{getClass:}} returns an object of type Class that represents the details of the calling object's class \\
+\textcolor{Maroon}{\texttt{instanceof:}} an operator that gives \texttt{true} if an object A is an instance of the same class as object B or a class that inherits from object B  \\
+\textcolor{Maroon}{\textbf{upcasting:}} when an object of a \emph{child} class is assigned to a variable of an \emph{ancestor} class, will always be valid ie. piece p = new rook, p is both a rook and a piece\\
+\textcolor{Maroon}{\textbf{downcasting:}} when an object of an \emph{ancestor} class is assigned to a variable of a \emph{child} class, onlt makes sense if the object is actually of that class. Generally only use for .equals methods \\
+\textcolor{Maroon}{\textbf{polymorphism:}} the ability to use objects or methods in many different ways; meaning multiple forms eg.(overloading, overriding, substitution, generics)  \\
+\textcolor{Maroon}{\textbf{substitution:}} using subclasses in place of superclasses\\
+\textcolor{Maroon}{\textbf{abstract class:}} a class that represents common attributes and methods of its subclasses but is also missing some information specific to its subclasses. Cannot be instantiated (i.e can't create an instance of type piece) \\
+\textcolor{Maroon}{\textbf{concrete class:}} any class that is not abstract, and has well-defined, specific implementations for all actions it can take\\
+\textcolor{Maroon}{\textbf{abstract method:}} defines a superclass method that is common to all subclasses, but has no implementation. Each subclass would provide it's own implementation through overriding (empty method)\\
+
+\section{Interfaces and Polymorphism}
+\textcolor{Magenta}{\textbf{interface:}} declares a set of constants and/or methods that define the \emph{behaviour} of an object, similar to a can do relationship, generally called <...>able \\ 
+\textcolor{Magenta}{\textbf{implements:}} declares that a class implements all the functionality expected by an interface \\ 
+\textcolor{Magenta}{\textbf{default:}} incidates a standard implementation of a method that can be overridden if the behaviour doesn't match what is expected of the implementing class \\ 
+
+\section{Generics}
+\textcolor{Plum}{\textbf{type parameter: }} \texttt{T} is a \emph{type parameter} or a type variable, the value of \texttt{T} is literally a type, and when \texttt{T} is given a value, every instance of the placeholder variable is replaced (Comparable interface for example)\\
+\textcolor{Plum}{\texttt{ArrayList:}} a class that can be iterated like arrays, automatically handles resizing, has a \texttt{ToString()} method, and a \texttt{compareTo()} method that should be overriden\\
+\textcolor{Plum}{\textbf{generic class:}} a class defined with an arbitrary type for a field, parameter or return type\\
+\textcolor{Plum}{\textbf{generic subtyping:}} generic classes or interfaces are \emph{not} related merely because there is a relationship between their type parameters, eg. cannot assign dog = animal, or animal = dog as errors will occur\\
+\textcolor{Plum}{\textbf{wildcard \texttt{?}:}} stands for \emph{unknown} type, generally used with when reading from and inserting to a generic collection, eg can print lists of array dogs and bears using similar functionality\\
+\textcolor{Plum}{\textbf{extends wildcard:}} \texttt{List <? extends A >} means that a list of objects are instances of the class A or subclasses of A\\
+\textcolor{Plum}{\textbf{super wildcard:}} \texttt{List <? super A>} means a list of objects that are instances of class A or superclasses of A\\
+\textcolor{Plum}{\textbf{subtyping:}} \texttt{<:} denotes \emph{is a subtype of}\\
+\textcolor{Plum}{\textbf{generic method:}} a method that accepts arguments or returns objects of an arbitrary type\\
+
+\section{Collections and Maps}
+\textcolor{Cyan}{\textbf{collections: }} a framework that permits storing, accessing and manipulating lists (an ordered collection) \\ 
+\textcolor{Cyan}{\textbf{maps: }} a framwork that permits storing, accessing and manipulating key-value pairs \\ 
+\textcolor{Cyan}{\textbf{anonymous inner class:}} a class created "on the fly" without a new file, or class name for which a single object is created \\
+\textcolor{Cyan}{\texttt{ArrayList:}} similar to arrays, but better with additional functionality like dynamic length \\
+\textcolor{Cyan}{\texttt{HashSet:}} ensures elements are unique and has no duplicates \\
+\textcolor{Cyan}{\texttt{PriorityQueue:}} allows you to order elements in non-trivial ways \\ 
+\textcolor{Cyan}{\texttt{TreeSet:}} fast lookup/search of unique elemets \\
+\textcolor{Cyan}{\texttt{HashMap:}} takes two types, K and V (key and value) \\ 
+
+\newpage
+ \section{Exceptions}
+\textcolor{PineGreen}{\textbf{Syntax: }} errors where what you write isn't legal code; identified by the editor/compiler \\  
+\textcolor{PineGreen}{\textbf{Semantic: }} error when the code runs to completion, but results in incorrect output/operation; identified through software testing \\
+\textcolor{PineGreen}{\textbf{Runtime: }} an error that causes your program to prematurely crash and burn; identified through execution eg. dividing by 0, out of bounds \\ 
+\textcolor{PineGreen}{\textbf{Exception: }} an error state created by a runtime error in your code; an exception \\
+\textcolor{PineGreen}{\textbf{Exception: }} an object created by Java to represent the error that was encountered \\
+\textcolor{PineGreen}{\textbf{Exception Handling: }} code that actively protects your program in the case of exceptions \\ 
+\textcolor{PineGreen}{\texttt{try: }} attempts to execute some code that may result in an error state or exception \\ 
+\textcolor{PineGreen}{\texttt{catch: }} deals with the exception, eg. asking the user to input again, adjust an index or output and enrror message and exit \\ 
+\textcolor{PineGreen}{\texttt{finally: }} performs clean up, eg. closing files, assuming the code didn't exit \\ \\
+\textcolor{PineGreen}{\textbf{throw: }} responds to an error state by creating an exception object, either already existing or one defined by you \\ 
+\textcolor{PineGreen}{\textbf{throws: }} indicates a method has a potential to create and can't be bothered to deal with it, or that the exact response varies by application \\
+\textcolor{PineGreen}{\textbf{unchecked exception: }} inherits from the \texttt{error} class, can be safely ignored by the programmer, most inbuilt Java exceptions are unchecked as you aren't forced to protect against them \\  
+\textcolor{PineGreen}{\textbf{checked: }} inherits from the \texttt{exception} class, must be explicitly handled by the programmer in some way, the complier gives an error if a checked exception is ignored \\ 
+\textcolor{PineGreen}{\textbf{exception handling: }} use \texttt{catch} or \texttt{declare} for handling checked exceptions, enclose code that can generate exceptions in a try-catch block or declaring a method may create an exception by using \texttt{throws} clause \\ 
+
+ \section{Design Patterns}
+\textcolor{Melon}{\textbf{singleton pattern:}} ensures that class only has one instance and provides a global point of access to it \\
+\textcolor{Melon}{\textbf{template method pattern:}} essentially inheritance, defines a family of algorithms, encapsulates each one and then make them interchangable \\ 
+\textcolor{Melon}{\textbf{strategy pattern:}} implements/interface, allows reuse of specific methods \\ 
+\textcolor{Melon}{\textbf{factory:}} a general technique for manufacturing (creating) objects \\ 
+\textcolor{Melon}{\textbf{product:}} an abstract class that generalies the objecte being created/produced by the factory \\ 
+\textcolor{Melon}{\textbf{creator:}} an abstract class that generalises the objects that will consume/produce products; generally have some operation (eg. constructor) that will invoke the factory method \\ 
+\textcolor{Melon}{\textbf{subject:}} an "important" object, whose state (or change in state) determines the actions of other classes\\ 
+\textcolor{Melon}{\textbf{observer:}} an object that monitors the subject in order to respond to its state and any other changes made to it \\  
+\textcolor{Melon}{\textbf{creational design patterns:}} solutions related to object creation, ie singleton and factory method \\ 
+\textcolor{Melon}{\textbf{behavioural design patterns:}} strategy, template method, observer \\ 
+
+\newpage
+\section {Testing}
+\textcolor{RubineRed}{\textbf{GRASP:}} General, Responsibility, Assignment, Software, Patterns/Principles. A series of guidelines for assigning responsibility to classes in an object-oriented design; how to break a problem down into modules with a clear purpose. \\ 
+\textcolor{RubineRed}{\textbf{cohesion:}} Classes are designed to solve clear, focused problems. The class' methods/attributes are related and work towards this objective. Designs should have maximum cohesion. \\
+\textcolor{RubineRed}{\textbf{coupling: }} The degree of interation between classes, dependency between classes. Designs should have minimum (low) coupling. \\ 
+\textcolor{RubineRed}{\textbf{open-closed principle:}} Classes should be open to extension, but closed to modification. \\ 
+\textcolor{RubineRed}{\textbf{abstraction:}} Solving problems by creating abstact data types to represent problem components; achieved in OOP through classes, which represent data and actions. \\  
+\textcolor{RubineRed}{\textbf{encapsulation:}} The details of a class should be kept hidden or private, and the user's ability to access the hidden details is restricted or controlled. Also known as data or information hiding. \\  
+\textcolor{RubineRed}{\textbf{polymorphism:}} The ability to use an object or method in many different ways; achived in Java through \emph{ad hoc} (overloading), \emph{subtype} (overriding, substituion), and \emph{parametric} (generics) polymorphism. \\ 
+\textcolor{RubineRed}{\textbf{delegation:}} keeps classes focused by passing work to other classes. Computations should be performed in the class with the greatest amount of relevant information. \\  
+\textcolor{RubineRed}{\textbf{software testing:}} Important for reducing costs
+\textcolor{RubineRed}{\textbf{unit:}} a small, well-defined component of a software system with one, or a small number of responsibilities. \\  
+\textcolor{RubineRed}{\textbf{unit test:}} Verifying the operation of a unit by testing a single use case (input/output), intending for it to fail. \\  
+\textcolor{RubineRed}{\textbf{unit testing:}} Identifying bugs in software by subjecting every unit to a suite of tests. \\ 
+\textcolor{RubineRed}{\textbf{manual testing:}}  Tetsing code manually in an ad-hoc manner. Generally difficult to reach all edge cases, and not scalable for large projects. \\
+\textcolor{RubineRed}{\textbf{automated testing:}} Testing code with automated, purpose built software. Generally faster, more reliable and less reliant on humans.\\  
+\textcolor{RubineRed}{\texttt{assert:}} a true or false statement that indicates the success or failure of a test case \\  
+\textcolor{RubineRed}{\textbf{TestCase class:}} a class dedicated to testing a single unit \\  
+\textcolor{RubineRed}{\textbf{TestRunner class:}} a class dedicated to executing the tests on a unit \\  
+\textcolor{RubineRed}{\textbf{software tester:}} conducts tests on software, primarily to find and eliminate bugs \\  
+\textcolor{RubineRed}{\textbf{software quality assurance:}} actively works to improve the development process/lifecycle. Directs software to conduct tests, primarily to prevent bugs \\ 
+
+\section {Asynchronous Programming}
+\textcolor{RoyalPurple}{\textbf{sequential programming:}} a program that is run (more or less) from top to borrom, starting at the beginning of the \emph{main} and concluding at it's end \\ 
+\textcolor{RoyalPurple}{\textbf{state:}} the properties that define an object or device; for example if it is 'active' \\ 
+\textcolor{RoyalPurple}{\textbf{event:}} created when the state of an object is altered \\ 
+\textcolor{RoyalPurple}{\textbf{callback:}} a method triggered by an event \\  
+\textcolor{RoyalPurple}{\textbf{event-driven programming:}} using events and callbacks to control the flow of a program's execution \\ 	 
+\textcolor{RoyalPurple}{\textbf{polling:}} also known as sampling, relies on the program to actively enquire aboout the state of an object eg. using if else statements - has disadvantages (set order, can't escape from a method until it is complete, unable to execute two methods at once)\\  
+\textcolor{RoyalPurple}{\textbf{interrupt:}} a signal generated by hardware or software indicating an event that needs immediate CPU attention \\  
+\textcolor{RoyalPurple}{\textbf{interrupt service routine:}} event-handling code to respond to interrupt signals, ie. callback for an interrupt signal \\  
+\textcolor{RoyalPurple}{\textbf{composition:}} an alternative to inheritance, allows reuse of code by giving a component entities. eg. if a mob can be aggressive sometimes but non-aggro othertimes, has a component called aggressive with a state \\  
+
+\section{Advanced Java and OOP}
+\textcolor{SeaGreen}{\textbf{enum:}} a class that consists of a finite list of constants \\ 
+\textcolor{SeaGreen}{\textbf{variadic method:}} a method that takes an unknown number of arguments \\ 
+\textcolor{SeaGreen}{\textbf{functional interface:}} an interface that contains only a single abstract method, also known as a single abstract method interface \\ 
+\textcolor{SeaGreen}{\texttt{Predicate<T>:}} accepts one argument of type T, and returns true or false \\
+\textcolor{SeaGreen}{\texttt{UnaryOperator<T>:}} accepts an argument of type T and returns an object of the same type T \\ 
+\textcolor{SeaGreen}{\textbf{lambda expression:}} a technique that treats code as data that can be used as an "object", eg allows us to instantiate an object without implementing it \\
+\textcolor{SeaGreen}{\textbf{lambda expression:}} instances of functional interfaces \\ 
+\textcolor{SeaGreen}{\textbf{method reference:}} an object that stores a method, can take place of a lambda expression of that lambda expression is only used to call a single method eg. \texttt{String::toUpperCase}\\ 
+\textcolor{SeaGreen}{\textbf{stream:}} a series of elements given in a sequence, that are automatically put through a pipeline of operations \\ 
+\textcolor{SeaGreen}{\textbf{}}
+\textcolor{SeaGreen}{\textbf{}}
+
+
+\end{document} 
